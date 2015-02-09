@@ -1,0 +1,484 @@
+.sub-header {
+    height: 45px;
+    background-color: black;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.data-table-header {
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.left-side {
+    margin-top: 45px;
+}
+
+.sidebar h3 {
+    margin: 15px;
+}
+
+.breadcrumb {
+    display: inline-block !important;
+}
+
+#nav-search{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    margin: 7px;
+}
+
+.content, .page-content {
+    padding: 0 15px !important;
+}
+
+.breadcrumb {
+    margin-bottom: 0px;
+}
+
+.list-header-buttons {
+    padding: 30px 0 0 0;
+}
+.btn-link {
+    box-shadow: none !important;
+}
+table .btn-xs {
+    font-size: 14px !important;
+    margin-right: 10px !important;
+}
+
+.widget-header {
+    box-sizing: content-box;
+    position: relative;
+    background: linear-gradient(rgb(255, 255, 255) 0px, rgb(238, 238, 238) 100%) repeat-x rgb(247, 247, 247);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    padding-left: 12px;
+}
+
+fieldset {
+    margin: 20px 0 0 -29px;
+}
+
+.tab-content {
+    padding: 5px 10px;
+}
+
+/* Employees
+-------------------------------------------------- */
+
+.employee-list {
+    list-style: none;
+    padding: 0;
+}
+
+.employee-list li {
+    border: 1px solid rgb(221, 221, 221);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    border-top: 0px;
+    border-left-width: 4px;
+    padding: 7px;
+}
+
+.employee-list .item-green  {
+    border-left-color: rgb(154, 188, 50);
+}
+.employee-list .item-red  {
+    border-left-color: rgb(213, 63, 64);
+}
+.employee-list .item-grey  {
+    border-left-color: #DDDDDD;
+}
+.employee-list .item-orange  {
+    border-left-color: rgb(232, 177, 16);
+}
+
+/* Dropzone
+-------------------------------------------------- */
+
+.dz-default {
+    font-size: 26px;
+    text-align: center;
+}
+
+/* Loader
+-------------------------------------------------- */
+#loader-overlay {
+    top: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+.loader-img {
+    padding-top: 20px;
+    position: fixed;
+}
+.loader {
+    text-align: center;
+}
+
+.rate-green {
+    background-color: #87b87f;
+}
+.rate-red {
+    background-color: #d15b47;
+}
+.rate-orange {
+    background-color: #ffb752;
+}
+.rate-blue {
+    background-color: #6fb3e0;
+}
+.rate-grey {
+    background-color: #dbdbdb;
+}
+
+.text-green {
+    color: #87b87f;
+}
+.text-red {
+    color: #d15b47;
+}
+.text-orange {
+    color: #ffb752;
+}
+.text-blue {
+    color: #6fb3e0;
+}
+.text-grey {
+    color: #dbdbdb;
+}
+
+.rate-box {
+    color: #ffffff;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 60px;
+    text-align: center;
+}
+
+.avg-rate-box {
+    background-color: #dbdbdb;
+    border-radius: 5px;
+    padding: 10px 0 12px 30px;
+    text-align: center;
+    /*margin: 10px 0 5px 0;*/
+    margin-bottom: 18px;
+}
+
+.rate-box-list {
+    float: left;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 14px 0 10px 0;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    width: 90px;
+    margin-right: 10px;
+}
+
+.employee-list-image {
+    border-color: #dce3ed;
+    position: relative;
+    max-height: 80px;
+    max-width: 80px;
+}
+
+.entity-infobox {
+    width: 20px;
+    height: 20px;
+    border: 0;
+    margin-top: 5px;
+}
+
+.general-rating {
+    margin: 10px 0 12px 0;
+}
+.rating-comp1 {
+    background-color: rgb(175,216,248) !important;
+}
+.rating-comp2 {
+    background-color: rgb(203,75,75) !important;
+}
+.rating-comp3 {
+    background-color: rgb(77,167,77) !important;
+}
+.rating-comp4 {
+    background-color: rgb(148,64,237) !important;
+}
+.rating-comp5 {
+    background-color: rgb(189,155,51) !important;
+}
+
+.profile-picture {
+    text-align: center;
+}
+
+.rating-button {
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid;
+    min-height: 27px;
+}
+
+.evaluate-description {
+    font-style: italic;
+    color: #555555;
+    font-size: 12px;
+}
+
+.evaluation-history-date {
+    float: left;
+    margin: 0;
+    font-size: 10px;
+}
+
+.chart {
+    width: 100%;
+    height: 150px;
+}
+
+.area-rating {
+    margin-left: 10px;
+    color: rgb(130, 175, 111);
+    font-size: 16px;
+}
+
+.behaviour-info {
+    margin-left: 10px;
+    color: rgb(130, 175, 111);
+    font-size: 16px;
+}
+
+.behaviour-row {
+    padding: 0 15px;
+    border-bottom: 2px #999999 solid;
+    margin-bottom: 10px;
+}
+
+.behaviour-row p {
+    margin-top: 5px;
+}
+
+#graph-tooltip {
+    position: absolute;
+    display: none;
+    border: 1px solid #fdd;
+    padding: 2px;
+    background-color: #fee;
+    opacity: 0.80;
+}
+
+.action-plan-link {
+    font-size: 10px;
+    font-style: italic;
+}
+
+.employee-position-label {
+    margin: 0px 7px;
+    color: rgb(130, 175, 111);
+}
+
+/* SLIDER */
+::-ms-tooltip {
+    display: none;
+}
+
+slider {
+    display:     block;
+    position:    relative;
+    height:      30px;
+    width:       500px;
+}
+
+slider span.bar {
+    height:     50%;
+    z-index:    0;
+    background: #eee;
+    left:       0;
+    top:        25%;
+    cursor:     pointer;
+}
+
+slider span.bar.selection, slider span.bar.unselected {
+}
+
+slider span.bar.selection {
+    background: #0a0;
+    opacity:    0.5;
+}
+
+slider span.bar.unselected {
+    width:      auto;
+    background: #a00;
+    opacity:    0.5;
+}
+
+slider span.pointer {
+    cursor:           pointer;
+    width:            15px;
+    top:              0;
+    bottom:           0;
+    background-color: #00a;
+}
+
+slider span.pointer:hover {
+}
+
+slider span.pointer.active {
+}
+
+slider span.bubble {
+    font-size:   0.7em;
+    line-height: 1.4em;
+    font-family: sans-serif;
+    text-align:  center;
+    text-shadow: none;
+    top:         -1.3em;
+    cursor:      pointer;
+}
+
+slider span.bubble.selection, slider span.bubble.limit {
+    top: 25%;
+}
+
+slider span.bubble.selection {
+}
+
+slider span.bubble.limit {
+}
+
+slider span.bubble.low, slider span.bubble.high {
+}
+
+::-ms-tooltip {
+    display: none;
+}
+
+#slider-container {
+    -webkit-touch-callout: none;
+    -webkit-user-select:   none;
+    -khtml-user-select:    none;
+    -moz-user-select:      -moz-none;
+    -ms-user-select:       none;
+    user-select:           none;
+}
+
+.sortable-handle {
+    cursor: move;
+}
+
+.tags {
+    width: 100%;
+}
+
+.custom-badge {
+    display: inline-block;
+    text-align: center;
+    border-radius: 10px;
+    padding: 2px 7px;
+    color: #FFFFFF;
+}
+
+.chosen-choices > .search-field > input {
+    height: 100% !important;
+}
+
+.chosen-container {
+    width: 100% !important;
+}
+
+/* Employees */
+
+.evaluation-preview-box {
+    text-decoration: none;
+    color: #393939;
+}
+
+/* Areas */
+
+.area-rating-name {
+    font-size: 11px;
+}
+
+.area-rating-separator {
+    margin: 10px !important;
+    border-top: 1px solid #858585 !important;
+}
+
+.image-input-preview {
+    max-width: 100px;
+    margin-top: 10px;
+}
+
+.evaluation-select {
+    width: 100%;
+}
+
+/* Action Plans */
+
+.action-plan-description {
+    border-radius: 0px;
+    color: rgb(133, 133, 133);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(213, 213, 213);
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+/* Filters */
+.filters-main-container {
+    margin: 5px;
+    border-radius: 10px;
+    border-color: #888;
+    padding-left: 30px;
+}
+
+.filters-label {
+    font-size: 13px;
+    color: #555;
+}
+
+.filters-badge {
+    font-size: 9px;
+    padding: 0px 5px;
+    margin-right: 5px;
+}
+
+/* HTML Editor */
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+}
+
+.ta-editor button{
+    font-size: 12px;
+    padding: 5px;
+}

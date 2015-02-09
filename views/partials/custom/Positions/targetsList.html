@@ -1,0 +1,44 @@
+<div>
+    <div class="page-header">
+        <h1>
+            <span ng-bind="getTranslation('Targets')"></span>
+            <small>
+                <i class="fa fa-double-angle-right"></i>
+                <a ng-click="addTarget()" class="hand-cursor" ng-bind="getTranslation('Add New')"></a>
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 20px;"></th>
+            <th style="width: 20px;"></th>
+            <th ng-bind="getTranslation('Status')" style="width: 50px;"></th>
+            <th ng-bind="getTranslation('Description')"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-row" ng-repeat="target in targets">
+            <td>
+                <a class="btn btn-xs btn-info" ng-click="editTarget(target)">
+                    <i class="fa fa-edit bigger-120"></i>
+                </a>
+            </td>
+            <td>
+                <a class="hand-cursor btn btn-xs btn-danger" ng-click="deletePositionItem('targets', target)">
+                    <i class="fa fa-trash-o bigger-120"></i>
+                </a>
+            </td>
+            <td>
+                <span ng-show="target.draft" class="badge badge-info">draft</span>
+                <span ng-show="!target.draft && target.status == 0" class="hand-cursor badge badge-success" ng-click="setStatus(target, 1)">ready</span>
+                <span ng-show="!target.draft && target.status == 1" class="fa fa-check-square-o hand-cursor" ng-click="setStatus(target, 2)"></span>
+                <span ng-show="!target.draft && target.status == 2" class="fa fa-square-o hand-cursor" ng-click="setStatus(target, 1)"></span>
+            </td>
+            <td>{{target.targetDescription}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

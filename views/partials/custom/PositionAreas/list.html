@@ -1,0 +1,96 @@
+<div ng-include src="deleteModal"></div>
+
+<div class="page-content">
+
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    <img src="/images/custom/positionAreas.png" width="50px" height="50px" />
+
+                    <span ng-bind="getTranslation('Position Areas')"></span>
+                </h3>
+            </div>
+            <div class="col-md-6 align-right list-header-buttons">
+                <a class="btn btn-link hand-cursor" href="/home/#/settings" >{{getTranslation("Back to settings")}}</a> |
+                <a class="btn btn-link hand-cursor" ng-click="new()" >{{getTranslation("Add new")}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-10"></div>
+
+    <div class="alert alert-warning" ng-show="items.length == 0">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times bigger-125"></i>
+        </button>
+        <i class="fa  fa-warning bigger-300" style="color:black"></i> &nbsp; &nbsp;
+        <div ng-show="!search">
+            <strong>{{getTranslation('OOPPS! seems that you don´t have any position areas defined yet... ')}} </strong>
+            <br>
+            <div class="text-primary"><i>{{getTranslation('...Or maybe you need more information about position areas...')}}</i></div>
+            <br>
+            <div class="row">
+                <a class="btn btn-default hand-cursor radius-6 " href="#">{{getTranslation('Get more info about position areas')}}</a>
+                <button class="btn btn-success radius-4 hand-cursor " ng-click="new()">{{getTranslation('Add a new position area')}}</button>
+            </div>
+        </div>
+        <strong ng-show="search">{{getTranslation('Sorry there are no position areas that match your search criteria')}} </strong>
+    </div>
+
+    <div class="widget-header widget-header-flat widget-header-small data-table-header">
+        <i class="fa fa-refresh hand-cursor" ng-click="getPositionAreas(1)" tooltip="{{getTranslation('Refresh')}}"></i>
+    </div>
+
+<table class="table" >
+    <tbody>
+        <tr class="table-row" ng-repeat="theItem in items" id="{{theItem._id}}">
+            <td  class="visible-md visible-lg hidden-sm hidden-xs" style="width: 100px;">
+                <div class="btn-group">
+                    <button class="btn btn-xs btn-link" ng-click="edit(theItem._id)" tooltip="{{getTranslation('Click here to modify this position area')}}">
+                        <i class="fa fa-edit bigger-140" style="color:black"></i>
+                    </button>
+                    <button class="hand-cursor btn btn-xs btn-link" ng-click="deletePositionAreas(theItem._id)" tooltip="{{getTranslation('Click here to permanently delete this position area')}}">
+                        <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                    </button>
+                </div>
+            </td>
+            <td  class="visible-xs visible-sm hidden-md hidden-lg" style="width: 1px;">  <!-- buttons for mobile -->
+                <div>
+                    <div class="inline position-relative">
+                        <button class="btn btn-minier btn-link dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-caret-square-o-down bigger-140" style="color:black"></i>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                            <li>
+                                <button class="btn btn-xs btn-link" ng-click="edit(theItem._id)" tooltip="{{getTranslation('Click here to modify this position area')}}">
+                                    <i class="fa fa-edit bigger-140" style="color:black"></i>
+                                </button>
+                            </li>
+
+                            <li>
+                                <button class="hand-cursor btn btn-xs btn-link" ng-click="deletePositionAreas(theItem._id)" tooltip="{{getTranslation('Click here to permanently delete this position area')}}">
+                                    <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                                </button>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </td>
+
+        <td class="hand-cursor" ng-click="edit(theItem._id)">{{theItem.positionArea}}</td>
+
+        </tr>
+    </tbody>
+</table>
+
+<ul class="pagination pull-right" ng-show="pages > 1">
+    <li ng-class="{disabled:page==1}"><a ng-click="getPositionAreas(Number(page)-1)" class="hand-cursor">&laquo;</a></li>
+    <li ng-repeat="n in [] | range:pages" ng-class="{active:page==$index+1}" ng-show="$index+1 < Number(page)+5 && $index+1 > Number(page)-5">
+        <a ng-click="getPositionAreas({{$index+1}})" class="hand-cursor">{{$index+1}}</a>
+    </li>
+    <li ng-class="{disabled:page==pages}"><a ng-click="getPositionAreas(Number(page)+1)" class="hand-cursor">&raquo;</a></li>
+</ul>
+</div>

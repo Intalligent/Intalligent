@@ -1,0 +1,32 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left  hand-cursor" ng-click="editSelectedPosition(selectedPosition)" >{{getTranslation('Back to')}} <strong style="color:black">{{selectedPosition.positionName}}</strong></button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <form novalidate id="Algorithm-form" name="Algorithm-form" role="form">
+                <div class="row" ng-form="AlgorithmForm">
+                    <div class="col-md-12 col-xs-12">
+
+                        <h4 class="header green" style="margin-top: 0px;" ng-bind="getTranslation('Areas')"></h4>
+
+                        <div class="form-group" ng-repeat="area in selectedPosition.areas" ng-show="area.areaWeightActive && !area.draft && area.status == 1">
+                            <label ng-bind="area.areaName"></label>
+                            <slider ng-model="area.areaWeight" floor="0" ceiling="100" step="1" ng-change="calculateAlgorithmTotal()"></slider>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button class="btn btn-primary pull-right" ng-click="saveAlgorithm()" ng-bind="getTranslation('Save')"
+                        ng-disabled="calculateAlgorithmTotal() != 100"></button>
+
+                <p class="pull-right" style="margin: 11px; font-weight: bold;">{{getTranslation('Algorithm Total:')}} <span ng-bind="calculateAlgorithmTotal()"></span>%</p>
+            </form>
+        </div>
+    </div>
+
+</div>

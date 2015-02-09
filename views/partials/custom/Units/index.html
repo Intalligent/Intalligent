@@ -1,0 +1,37 @@
+<div class="row" ng-init="getUnits(1,'','')" >
+    <div class="col-md-12">
+        <div class="breadcrumbs" id="breadcrumbs">
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="/home/#/home">{{getTranslation("Home")}} </a>
+                </li>
+                <li><a href="/home/#/settings">{{getTranslation("Settings")}}</a></li>
+                <li class="active">{{getTranslation("Units")}}</li>
+            </ul><!-- .breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search" ng-submit="getUnits(1, UnitsModel.data.search)">
+                    <span class="input-icon">
+                        <input type="text" placeholder="{{getTranslation('Search')}} ..." class="nav-search-input" autocomplete="off" ng-model="UnitsModel.data.search">
+                        <button type="button" class="btn btn-xs btn-info btn-search" data-toggle="button" ng-click="getUnits(1, UnitsModel.data.search)">{{getTranslation("Search")}}</button>
+                    </span>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" ng-include src="subPage">
+
+            </div>
+        </div>
+
+        </br>
+
+        <hr>
+
+    </div>
+
+</div>

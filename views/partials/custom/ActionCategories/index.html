@@ -1,0 +1,31 @@
+<aside class="right-side full-page" ng-init="getActionCategories(1,'','')">
+        <div class="breadcrumbs" id="breadcrumbs">
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>
+                    <a href="/home/#/home">{{getTranslation("Home")}} </a>
+                </li>
+                <li><a href="/home/#/settings">{{getTranslation("Settings")}}</a></li>
+                <li class="active">{{getTranslation("Action Categories")}}</li>
+            </ul><!-- .breadcrumb -->
+
+            <div class="nav-search" id="nav-search">
+                <form class="form-search" ng-submit="getActionCategories(1, ActionCategoriesModel.data.search)">
+                    <span class="input-icon">
+                        <input type="text" placeholder="{{getTranslation('Search')}} ..." class="nav-search-input" autocomplete="off" ng-model="ActionCategoriesModel.data.search">
+                        <button type="button" class="btn btn-xs btn-info btn-search" data-toggle="button" ng-click="getActionCategories(1, ActionCategoriesModel.data.search)">{{getTranslation("Search")}}</button>
+                    </span>
+                </form>
+            </div>
+
+        </div>
+
+    <div ng-include src="subPage"></div>
+
+        </br>
+
+        <hr>
+
+
+</aside>

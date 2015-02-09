@@ -1,0 +1,124 @@
+<div class="panel panel-info" >
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+                        <span class="badge badge-info  hand-cursor" tooltip="{{getTranslation('Click here to get more info about behaviours')}}">
+                        ?
+                        </span>
+                        {{getTranslation('Behaviours of')}} <strong style="color:black">{{selectedArea.areaName}}</strong>
+        <button class="btn btn-link pull-right hand-cursor" ng-click="addBehaviour()">{{getTranslation('Add new')}}</button>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="icon-remove"></i>
+            </button>
+            {{getTranslation('Get more info')}} <a href="#" >{{getTranslation('here')}}</a> {{getTranslation('about different statuses in behaviours')}}
+            <br>
+        </div>
+
+        <div class="alert alert-warning" ng-hide="selectedArea.behaviours">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times bigger-125"></i>
+            </button>
+            <i class="fa  fa-warning bigger-300" style="color:black"></i> &nbsp; &nbsp;
+            <div>
+                <strong>{{getTranslation('OOPPS! seems that you don´t have any behaviours defined yet... ')}} </strong>
+                <br>
+                <div class="text-primary"><i>{{getTranslation('...Or maybe you need more information about behaviours, ratings, and so on?')}}</i></div>
+            </div>
+            <br>
+
+            <div class="row">
+                <a class="btn btn-default hand-cursor radius-6 " href="#">{{getTranslation('Get more info about behaviours')}}</a>
+                <button class="btn btn-success radius-4 hand-cursor " ng-click="addBehaviour()">{{getTranslation('Add a new behaviour')}}</button>
+            </div>
+        </div>
+
+
+            <table class="table">
+                <tbody ui-sortable="sortableOptions" ng-model="selectedArea.behaviours">
+                <tr class="table-row" ng-repeat="behaviour in selectedArea.behaviours">
+                    <td style="width: 20px;"><i class="sortable-handle fa fa-bars" tooltip="{{getTranslation('Drag and drop the behaviour to reorder')}}"></i></td>
+                    <td class="visible-md visible-lg hidden-sm hidden-xs" style="width: 150px;">
+                        <div class="btn-group">
+                            <button class="btn btn-xs btn-link hand-cursor" ng-click="editBehaviour(behaviour)"  tooltip="{{getTranslation('Click here to modify this behaviour')}}">
+                                <i class="fa fa-edit bigger-140" style="color:black"></i>
+                            </button>
+
+                            <button class="hand-cursor btn btn-xs btn-link" ng-click="deletePositionItem('behaviours', behaviour)" tooltip="{{getTranslation('Click here to permanently delete this behaviour')}}">
+                                <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td  class="visible-xs visible-sm hidden-md hidden-lg" style="width: 1px;">  <!-- buttons for mobile -->
+                        <div>
+                            <div class="inline position-relative">
+                                <button class="btn btn-minier btn-link dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-caret-square-o-down bigger-140" style="color:black"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <button class="btn btn-xs btn-link hand-cursor" ng-click="editBehaviour(behaviour)"  tooltip="{{getTranslation('Click here to modify this behaviour')}}">
+                                            <i class="fa fa-edit bigger-140" style="color:black"></i>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button class="hand-cursor btn btn-xs btn-link" ng-click="deletePositionItem('behaviours', behaviour)" tooltip="{{getTranslation('Click here to permanently delete this behaviour')}}">
+                                            <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                                        </button>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+
+
+                    <td class="visible-md visible-lg hidden-sm hidden-xs" style="width: 1px;">
+                        <span class="badge badge-default  hand-cursor" tooltip="{{getTranslation('Click here to get more info about different statuses')}}">
+                        ?
+                        </span>
+                    </td>
+                    <td ng-init="setTooltips()" class="visible-md visible-lg hidden-sm hidden-xs"  style="width: 100px;">
+
+                        <span ng-show="behaviour.draft" class="badge badge-danger" tooltip="{{getTranslation('Behaviour without ratings, please add some ratings to the behaviour')}}">
+                            {{getTranslation('draft')}}
+                        </span>
+                        <span ng-show="!behaviour.draft && behaviour.status == 0" class="hand-cursor badge badge-success  hand-cursor" ng-click="setStatus(behaviour, 1)" tooltip="{{getTranslation('This behaviour is ready for activation, click here to activate it')}}">
+                             {{getTranslation('ready')}}
+                        </span>
+                        <span ng-show="!behaviour.draft && behaviour.status == 1" class="badge badge-info  hand-cursor" ng-click="setStatus(behaviour, 2)" tooltip="{{getTranslation('This Behaviour is active, click here to deactivate it')}}">
+                              {{getTranslation('active')}}
+                        </span>
+                        <span ng-show="!behaviour.draft && behaviour.status == 2" class="badge badge-default  hand-cursor" ng-click="setStatus(behaviour, 1)" tooltip="{{getTranslation('This Behaviour is not active, click here to activate it')}}">
+                              {{getTranslation('not active')}}
+                        </span>
+
+                    </td>
+                    <td class="visible-xs visible-sm hidden-md hidden-lg" style="width: 1px;">  <!-- for mobile -->
+                        <span ng-show="behaviour.draft" class="badge badge-danger" tooltip="{{getTranslation('Behaviour without ratings, please add some ratings to the behaviour')}}">
+                            &nbsp;
+                        </span>
+                        <span ng-show="!behaviour.draft && behaviour.status == 0" class="hand-cursor badge badge-success  hand-cursor" ng-click="setStatus(behaviour, 1)" tooltip="{{getTranslation('This behaviour is ready for activation, click here to activate it')}}">
+                             &nbsp;
+                        </span>
+                        <span ng-show="!behaviour.draft && behaviour.status == 1" class="badge badge-info  hand-cursor" ng-click="setStatus(behaviour, 2)" tooltip="{{getTranslation('This Behaviour is active, click here to deactivate it')}}">
+                              &nbsp;
+                        </span>
+                        <span ng-show="!behaviour.draft && behaviour.status == 2" class="badge badge-default  hand-cursor" ng-click="setStatus(behaviour, 1)" tooltip="{{getTranslation('This Behaviour is not active, click here to activate it')}}">
+                             &nbsp;
+                        </span>
+
+                    </td>
+
+
+                    <td class="hand-cursor" ng-click="editBehaviour(behaviour)">{{behaviour.behaviourName}}</td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

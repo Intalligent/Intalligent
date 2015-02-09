@@ -1,0 +1,44 @@
+<section class="content">
+
+    <div class="row">
+        <button class="btn btn-link" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="space-10"></div>
+        <form class="simple-form" role="form" name="PositionCategories_form">
+            <fieldset>
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+                              <div class="form-group" ng-class="{'has-error':PositionCategories_form.positionCategory.$invalid}">
+                                   <label for="positionCategory">{{getTranslation("Position category name")}}</label>
+                                   <input type="text" class="form-control" name="positionCategory" id="positionCategory" placeholder="" ng-model="_PositionCategories.positionCategory" required>
+                                   <span ng-show="PositionCategories_form.positionCategory.$invalid" class="help-inline">{{getTranslation("Field Position Category is required")}}</span>
+                              </div>
+                              <div class="form-group" ng-class="{'has-error':PositionCategories_form.code.$invalid}">
+                                  <label for="code">{{getTranslation("Position Category code")}}</label>
+                                  <input type="text" class="form-control" name="code" id="code" placeholder="" ng-model="_PositionCategories.code" required>
+                                  <span ng-show="PositionCategories_form.code.$invalid" class="help-inline">{{getTranslation("Field code is required")}}</span>
+                              </div>
+                          </div>
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="PositionCategories_form.$invalid  || PositionCategories_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_PositionCategories)">
+                        <i class="fa fa-save"></i>
+                        {{getTranslation("Save")}}
+                    </button>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</section>

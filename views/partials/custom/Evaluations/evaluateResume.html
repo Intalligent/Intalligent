@@ -1,0 +1,52 @@
+<div ng-include src="finalizeModal"></div>
+
+<div class="row" style="margin: 20px;">
+
+    <button class="btn btn-warning pull-right" ng-click="finalizeEvaluation()">{{getTranslation('Finalize Evaluation')}}</button>
+
+    <button class="btn btn-info pull-right" ng-click="evaluate(selectedEmployee._id)">{{getTranslation('Back to evaluation')}}</button>
+
+</div>
+    <div id="accordion" class="accordion-style1 panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="/#{{selectedEmployee._id}}">
+                        <i class="fa fa-angle-down bigger-110" data-icon-hide="fa-angle-down" data-icon-show="fa-angle-right"></i>
+                        &nbsp;{{selectedEmployee.employeeName}}
+                        <label class="text-warning pull-right">
+                            {{resumeData.appraisalPercent.toFixed(2)}} %
+                        </label>
+                    </a>
+
+                </h4>
+
+            </div>
+
+            <div class="panel-collapse collapse in" id="{{employee._id}}">
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>{{getTranslation('Area name')}}</th>
+                            <th>{{getTranslation('value')}}</th>
+                            <th>{{getTranslation('percent')}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="area in resumeData.areasOverview">
+                            <td>{{area.areaName}}</td>
+                            <td>{{area.areaValue}}</td>
+                            <td>{{area.areaPercent.toFixed(2)}} %</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+

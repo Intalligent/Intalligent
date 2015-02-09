@@ -1,0 +1,27 @@
+<div class="page-content">
+
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    <span ng-bind="getTranslation('Loader')"></span>
+                </h3>
+            </div>
+            <div class="col-md-6 align-right list-header-buttons">
+                <a class="btn btn-link hand-cursor" href="/home/#/settings" ng-show="source == 'settings'">{{getTranslation("Back to settings")}}</a>
+                <a class="btn btn-link hand-cursor" href="/home/#/employees" ng-show="source == 'employees'">{{getTranslation("Back to employees")}}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-10"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body" style="overflow-y: hidden; overflow-x: scroll;">
+
+            <form class="dropzone" id="dropzone" ng-init="initDropzone()"></form>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,40 @@
+<div ng-include src="submenu"></div>
+
+<aside class="right-side" ng-init="clearData()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home">Home</a>
+            </li>
+            <li>
+                <a href="/home/#/admin">Admin</a>
+            </li>
+            <li>
+                <a href="/home/#/admin/files">Files</a>
+            </li>
+            <li class="active">Upload</li>
+        </ul><!-- .breadcrumb -->
+
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                Upload
+            </h1>
+        </div><!-- /.page-header -->
+
+        <form class="dropzone" id="dropzone"></form>
+    </div>
+
+    <div id="dropzone-item" class="hidden">
+        <div class="dz-item">
+            <span class="label label-danger dz-label" style="display: none;">error</span>
+            <span class="label label-success dz-label" style="display: none;">success</span>
+
+            <img data-dz-thumbnail />
+        </div>
+    </div>
+</aside>

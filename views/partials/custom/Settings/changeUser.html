@@ -1,0 +1,37 @@
+<div ng-include src="submenu"></div>
+
+<aside class="right-side">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home" ng-bind="getTranslation('Home')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/settings" ng-bind="getTranslation('Settings')">Users</a>
+            </li>
+
+            <li>
+                <a ng-bind="getTranslation('Change User')"></a>
+            </li>
+
+        </ul><!-- .breadcrumb -->
+
+    </div>
+
+    <div class="page-content">
+
+        <form novalidate id="users-form" name="users-form" role="form" ng-submit="changeUser(adminUsersModel.data)">
+            <div class="form-group">
+                <label ng-bind="getTranslation('Username')"></label>
+                <input name="username" type="text" class="form-control" ng-model="adminUsersModel.data.username">
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn" ng-bind="getTranslation('Submit')"></button>
+        </form>
+
+    </div>
+
+</aside>

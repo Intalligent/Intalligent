@@ -1,0 +1,236 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $(function () {
+            $('#configuration-tabs a:first').tab('show')
+        });
+
+    });
+</script>
+
+<div ng-include src="submenu"></div>
+
+<aside class="right-side" ng-init="getConfigurations()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home">Home</a>
+            </li>
+            <li>
+                <a href="/home/#/admin">Admin</a>
+            </li>
+            <li class="active">Configurations</li>
+        </ul><!-- .breadcrumb -->
+
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                Configurations
+            </h1>
+        </div><!-- /.page-header -->
+
+        <form novalidate id="configurations-form" name="configurations-form" role="form" ng-submit="saveConfigurations()">
+            <!-- Nav tabs -->
+            <ul id="configuration-tabs" class="nav nav-tabs" style="height: 34px;">
+                <li><a href="/#files" data-toggle="tab">Files</a></li>
+                <li><a href="/#users" data-toggle="tab">Users</a></li>
+                <li><a href="/#communications" data-toggle="tab">Communications</a></li>
+                <li><a href="/#log" data-toggle="tab">Log</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="files">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-row">
+                            <td>
+                                Files Source
+                            </td>
+                            <td>
+                                <select id="files-source" class="configuration-field">
+                                    <option value="0">Local</option>
+                                    <option value="1">Amazon</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                Uploads Folder
+                            </td>
+                            <td>
+                                <input id="files-uploads-folder" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                Amazon Access Key Id
+                            </td>
+                            <td>
+                                <input id="amazon-access-key-id" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                Amazon Secret Access Key
+                            </td>
+                            <td>
+                                <input id="amazon-secret-access-key" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="tab-pane fade" id="users">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-row">
+                            <td>
+                                Users Password Minlength
+                            </td>
+                            <td>
+                                <input id="users-password-minlength" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                User Filters
+                            </td>
+                            <td>
+                                <input id="user-filters" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="tab-pane fade" id="communications">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-row">
+                            <td>
+                                SMTP Host
+                            </td>
+                            <td>
+                                <input id="smtp-host" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                SMTP Port
+                            </td>
+                            <td>
+                                <input id="smtp-port" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                SMTP User
+                            </td>
+                            <td>
+                                <input id="smtp-user" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                SMTP Password
+                            </td>
+                            <td>
+                                <input id="smtp-password" type="password" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                Communications To
+                            </td>
+                            <td>
+                                <input id="communications-to" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                Communications From Name
+                            </td>
+                            <td>
+                                <input id="communications-from-name" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td>
+                                Communications From Email
+                            </td>
+                            <td>
+                                <input id="communications-from-email" type="text" class="configuration-field"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="tab-pane fade" id="log">
+
+                    <p>Authorization</p>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-user"></i>
+                            <label>User Login</label>
+                            <input id="log-user-login" type="checkbox" class="configuration-field configuration-checkbox">
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-warning"></i>
+                            <label>Login Failed</label>
+                            <input id="log-user-fail-login" type="checkbox" class="configuration-field configuration-checkbox">
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fa fa-asterisk"></i>
+                            <label>Password Change</label>
+                            <input id="log-user-pwd-change" type="checkbox" class="configuration-field configuration-checkbox">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fa fa-user"></i>
+                            <label>Access denied to role</label>
+                            <input id="role-access-denied" type="checkbox" class="configuration-field configuration-checkbox">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+        </form>
+
+    </div>
+
+</aside>

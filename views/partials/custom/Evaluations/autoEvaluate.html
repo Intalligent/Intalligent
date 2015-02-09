@@ -1,0 +1,72 @@
+<div ng-include src="finalizeModal"></div>
+
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <a class="btn btn-link pull-left hand-cursor" href="/home/#/my-employee-profile">{{getTranslation('Back to my profile')}}</a>
+    </div>
+
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+            <div class="page-header position-relative">
+                <h1>{{selectedEmployee.employeeName}}<small><i class="fa fa-angle-double-right"></i> {{selectedEmployee.status}}</small></h1>
+            </div><!--/page-header-->
+
+            <div class="row" ng-repeat="area in areas" style="padding: 0 15px;">
+
+                <h3 class="header smaller lighter green" ng-bind="area.areaName"></h3>
+
+                <div class="row" ng-repeat="behaviour in area.behaviours">
+                    <div class="row" >
+                        <div class="col-md-9">
+                            <p><b ng-bind="behaviour.behaviourName"></b></p>
+                            <p class="evaluate-description" ng-show="behaviour.showBehaviourDescription" ng-bind="behaviour.behaviourDescription"></p>
+                        </div>
+                        <div class="col-md-3" id="{{behaviour._id}}">
+
+                            <div ng-show="behaviour.ratingViewType == 2">
+                                <div ng-repeat="ratingConfiguration in behaviour.ratingConfiguration" ng-show="behaviour.selectedValue == ratingConfiguration.ratingValue"
+                                     ng-click="changeRatingConfiguration(behaviour)" class="rating-button {{ratingConfiguration._id}}" style="background-color: {{ratingConfiguration.ratingColor}};" ng-init="setBGColor(ratingConfiguration._id, ratingConfiguration.ratingColor)"
+                                     ng-bind="ratingConfiguration.ratingDescription">
+                                </div>
+                            </div>
+
+                            <div ng-show="behaviour.ratingViewType == 3">
+                                <div class="input select">
+                                    <select ng-options="ratingConfiguration.ratingValue as ratingConfiguration.ratingDescription for ratingConfiguration in behaviour.ratingConfiguration"
+                                            ng-change="changeRatingConfiguration(behaviour, behaviour.selectedValue)" ng-model="behaviour.selectedValue" class="evaluation-select"></select>
+                                </div>
+                            </div>
+
+                            <div ng-show="behaviour.ratingViewType == 4">
+                                <div class="radio" ng-repeat="ratingConfiguration in behaviour.ratingConfiguration">
+                                    <label>
+                                        <input name="{{behaviour._id}}" type="radio" class="ace" ng-model="behaviour.selectedValue"
+                                               ng-click="changeRatingConfiguration(behaviour, ratingConfiguration.ratingValue)" ng-value="ratingConfiguration.ratingValue">
+                                        <span class="lbl">{{ratingConfiguration.ratingDescription}}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" ng-show="behaviour.allowComments">
+                        <div class="col-md-12">
+                            <p ng-bind="getTranslation('Comments:')"></p>
+                            <textarea ng-show="behaviour.allowComments" ng-model="behaviour.comments" style="width: 100%; margin-bottom: 10px;"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <a class="btn btn-warning" style="float: right; margin-top: 20px;" ng-click="showEvaluationResume()">{{getTranslation('Resume')}}</a>
+
+        </div>
+
+    </div>
+
+</div>

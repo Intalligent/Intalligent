@@ -1,0 +1,177 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left hand-cursor" ng-click="getPositions()">{{getTranslation('Back to positions list')}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+    <form id="Positions-form" name="Positions-form" role="form">
+        <div class="row" ng-form="PositionsForm">
+
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="/#home" data-toggle="tab">{{getTranslation('Position')}}</a></li>
+                <li class=""><a href="/#advanced" data-toggle="tab">{{getTranslation('Advanced')}}</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="home">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <!--<div class="form-group">
+                                <label ng-bind="getTranslation('Status')"></label>
+                                <select name="status" class="form-control" ng-model="selectedPosition.status" ng-options="obj.value as obj.name for obj in statuses" required></select>
+                            </div>-->
+                            <div class="form-group" ng-class="{'has-error':PositionsForm.positionName.$invalid}">
+                                <label ng-bind="getTranslation('Position Name')"></label>
+                                <input name="positionName" type="text" class="form-control required" ng-model="selectedPosition.positionName" ng-required="true" required>
+                                <span ng-show="PositionsForm.positionName.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Position Code')"></label>
+                                <input name="positionCode" type="text" class="form-control" ng-model="selectedPosition.positionCode">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Position Brand')"></label>
+                                <select multiple ng-init="initChosen('positionBrand')" id="positionBrand" name="positionBrand" class="form-control chosen-select" ng-model="selectedPosition.positionBrand"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Position Description')"></label>
+                                <textarea name="positionDescription" class="form-control" ng-model="selectedPosition.positionDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Position Category')"></label>
+                                <select name="positionCategory" class="form-control" ng-model="selectedPosition.positionCategory" ng-options="obj._id as obj.positionCategory for obj in positionCategories"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Position Area')"></label>
+                                <select name="positionArea" class="form-control" ng-model="selectedPosition.positionArea" ng-options="obj._id as obj.positionArea for obj in positionAreas"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Professional Group')"></label>
+                                <select name="professionalGroup" class="form-control" ng-model="selectedPosition.professionalGroup" ng-options="obj._id as obj.professionalGroup for obj in professionalGroups"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Department')"></label>
+                                <select multiple ng-init="initChosen('department')" id="department" name="department" class="form-control chosen-select" ng-model="selectedPosition.department"></select>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.autoAssessment">
+                                <label ng-bind="getTranslation('Auto Assessment')"></label>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error':PositionsForm.ratingCalculationType.$invalid}">
+                                <label ng-bind="getTranslation('Rating Calculation Type')"></label>
+                                <select name="ratingCalculationType" class="form-control" ng-model="selectedPosition.ratingCalculationType" ng-options="obj.value as obj.name for obj in positionRatingCalculationType"></select>
+                                <span ng-show="PositionsForm.ratingCalculationType.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="advanced">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.assessmentToEverybody">
+                                <label ng-bind="getTranslation('Assessment to Everybody')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="!selectedPosition.assessmentToEverybody">
+                                <label ng-bind="getTranslation('Assessment to')"></label>
+                                <select multiple ng-init="initChosen('assessmentTo')" id="assessmentTo" name="assessmentTo" class="form-control chosen-select" ng-model="selectedPosition.assessmentTo"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.assessmentScopeEverybody">
+                                <label ng-bind="getTranslation('Assessment Scope Everybody')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="!selectedPosition.assessmentScopeEverybody">
+                                <label ng-bind="getTranslation('Assessment Scope')"></label>
+                                <select multiple ng-init="initChosen('assessmentScope')" id="assessmentScope" name="assessmentScope" class="form-control chosen-select" ng-model="selectedPosition.assessmentScope"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.canViewEverybody">
+                                <label ng-bind="getTranslation('Can View Everybody')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="!selectedPosition.canViewEverybody">
+                                <label ng-bind="getTranslation('Can View')"></label>
+                                <select multiple ng-init="initChosen('canView')" id="canView" name="canView" class="form-control chosen-select" ng-model="selectedPosition.canView"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.canViewScopeEverybody">
+                                <label ng-bind="getTranslation('Can View Scope Everybody')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="!selectedPosition.canViewScopeEverybody">
+                                <label ng-bind="getTranslation('Can View Scope')"></label>
+                                <select multiple ng-init="initChosen('canViewScope')" id="canViewScope" name="canViewScope" class="form-control chosen-select" ng-model="selectedPosition.canViewScope"></select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.manageActionPlansToEverybody">
+                                <label ng-bind="getTranslation('Manage Action Plans Everybody')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="!selectedPosition.manageActionPlansToEverybody">
+                                <label ng-bind="getTranslation('Manage Action Plans To')"></label>
+                                <select multiple ng-init="initChosen('manageActionPlansTo')" id="manageActionPlansTo" name="manageActionPlansTo" class="form-control chosen-select" ng-model="selectedPosition.manageActionPlansTo"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.manageActionPlansScopeEverybody">
+                                <label ng-bind="getTranslation('Manage Action Plans Scope Everybody')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="!selectedPosition.manageActionPlansScopeEverybody">
+                                <label ng-bind="getTranslation('Manage Action Plans Scope')"></label>
+                                <select multiple ng-init="initChosen('manageActionPlansScope')" id="manageActionPlansScope" name="manageActionPlansScope" class="form-control chosen-select" ng-model="selectedPosition.manageActionPlansScope"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedPosition.sendEmailAfterEvaluation">
+                                <label ng-bind="getTranslation('Send Email After Evaluation')"></label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <button class="btn btn-primary pull-right" ng-click="savePosition(selectedPosition)" ng-bind="getTranslation('Save')"
+                    ng-disabled="PositionsForm.$invalid || PositionsForm.$pristine"></button>
+    </form>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" ng-show="selectedPosition.areas.length > 0">
+
+        <div class="row" style="text-align: center;" ng-hide="selectedPosition.topPerformerAlgorithm">
+            <p><i class="fa fa-warning"></i><span ng-bind="getTranslation('This position algorithm is outdated or is not valid.')"></span></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <p ng-bind="getTranslation('Design here the weight for every position area and external data in the top performer calculation for this position...')"></p>
+                <a href="#" ng-bind="getTranslation('More info')"></a>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <button class="btn btn-warning pull-right" ng-click="viewTopPerformerAlgorithm()" ng-bind="getTranslation('Top Performer Algorithm')"
+                        ng-class="{'btn-danger': !selectedPosition.topPerformerAlgorithm, 'btn-success': selectedPosition.topPerformerAlgorithm}"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-include src="areasList" ng-show="mode == 'update'" ng-init="getAreas()"></div>
+
+</div>

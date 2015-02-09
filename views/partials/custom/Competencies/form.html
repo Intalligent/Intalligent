@@ -1,0 +1,40 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link pull-left  hand-cursor" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+    <div class="space-10"></div>
+        <form class="simple-form" role="form" name="Competencies_form">
+            <fieldset>
+
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+    <div class="form-group" ng-class="{'has-error':Competencies_form.competency.$invalid}"> 
+        <label for="competency">{{getTranslation("competence")}}</label>
+        <input type="text" class="form-control" name="competency" id="competency" placeholder="" ng-model="_Competencies.competency" required>
+        <span ng-show="Competencies_form.competency.$invalid" class="help-inline">{{getTranslation("Field Competence is required")}}</span>
+   </div>
+</div> 
+
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="Competencies_form.$invalid  || Competencies_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_Competencies)">
+                        <i class="fa fa-save"></i>
+                        {{getTranslation("Save")}}
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>      <!-- end edit form -->

@@ -1,0 +1,47 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="space-10"></div>
+        <form class="simple-form" role="form" name="PositionAreas_form">
+            <fieldset>
+
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+                            <div class="form-group" ng-class="{'has-error':PositionAreas_form.positionArea.$invalid}">
+                                <label for="positionArea">{{getTranslation("Position area name")}}</label>
+                                <input type="text" class="form-control" name="positionArea" id="positionArea" placeholder="" ng-model="_PositionAreas.positionArea" required>
+                                <span ng-show="PositionAreas_form.positionArea.$invalid" class="help-inline">{{getTranslation("Field Position Area is required")}}</span>
+                           </div>
+
+                              <div class="form-group" ng-class="{'has-error':PositionAreas_form.code.$invalid}">
+                                  <label for="code">{{getTranslation("Position area code")}}</label>
+                                  <input type="text" class="form-control" name="code" id="code" placeholder="" ng-model="_PositionAreas.code" required>
+                                  <span ng-show="PositionAreas_form.code.$invalid" class="help-inline">{{getTranslation("Field code is required")}}</span>
+                              </div>
+                        </div>
+
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="PositionAreas_form.$invalid  || PositionAreas_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_PositionAreas)">
+                        <i class="fa fa-save"></i>
+                        {{getTranslation("Save")}}
+                    </button>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>      <!-- end edit form -->

@@ -1,0 +1,30 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-right" ng-show="urlsFor == 'targets'" ng-click="editTarget(selectedTarget)" >{{getTranslation('Back')}}</button>
+        <button class="btn btn-link pull-right" ng-show="urlsFor == 'actionPlan'" ng-click="editActionPlan(selectedActionPlan)" >{{getTranslation('Back')}}</button>
+    </div>
+
+    <form id="URLs-form" name="URLs-form" role="form">
+        <div class="row" ng-form="URLsForm">
+            <div class="col-md-12 col-xs-12">
+                <div class="form-group" ng-class="{'has-error':URLsForm.urlName.$invalid}">
+                    <label ng-bind="getTranslation('URL Name')"></label>
+                    <input name="urlName" type="text" class="form-control required" ng-model="selectedURL.urlName" ng-required="true" required>
+                    <span ng-show="URLsForm.urlName.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+                <div class="form-group" ng-class="{'has-error':URLsForm.urlAddress.$invalid}">
+                    <label ng-bind="getTranslation('URL Address')"></label>
+                    <input name="urlAddress" type="text" class="form-control required" ng-model="selectedURL.urlAddress" ng-required="true" required>
+                    <span ng-show="URLsForm.urlAddress.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+                <div class="form-group">
+                    <label ng-bind="getTranslation('URL Description')"></label>
+                    <textarea name="urlDescription" class="form-control" ng-model="selectedURL.urlDescription"></textarea>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary pull-right" ng-disabled="URLsForm.$invalid || URLsForm.$pristine" ng-click="saveURL(selectedURL)" ng-bind="getTranslation('Submit')"></button>
+    </form>
+
+</div>

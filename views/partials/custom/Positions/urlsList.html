@@ -1,0 +1,39 @@
+<div>
+    <div class="page-header">
+        <h1>
+            <span ng-bind="getTranslation('URLs')"></span>
+            <small>
+                <i class="fa fa-double-angle-right"></i>
+                <a ng-click="addURL()" class="hand-cursor" ng-bind="getTranslation('Add New')"></a>
+            </small>
+        </h1>
+    </div><!-- /.page-header -->
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th style="width: 20px;"></th>
+            <th style="width: 20px;"></th>
+            <th ng-bind="getTranslation('Name')"></th>
+            <th ng-bind="getTranslation('Description')"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-row" ng-repeat="url in selectedActionPlan.urls">
+            <td>
+                <a class="btn btn-xs btn-info" ng-click="editURL(url)">
+                    <i class="fa fa-edit bigger-120"></i>
+                </a>
+            </td>
+            <td>
+                <a class="hand-cursor btn btn-xs btn-danger" ng-click="deletePositionItem('urls', url)">
+                    <i class="fa fa-trash-o bigger-120"></i>
+                </a>
+            </td>
+            <td>{{url.urlName}}</td>
+            <td>{{url.urlDescription}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,46 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button ng-show="mode == 'view'" class="btn btn-link pull-left hand-cursor" ng-click="viewEmployee(selectedEmployee._id, selectedEmployee)" >{{getTranslation('Back to')}} {{selectedEmployee.employeeName}}</button>
+        <button ng-show="mode == 'myProfile'" class="btn btn-link pull-left hand-cursor" ng-click="getMyEmployeeProfile()" >{{getTranslation('Back to my profile')}}</button>
+        <button ng-show="mode == 'appraisalStorageList'" class="btn btn-link pull-left hand-cursor" ng-click="getEmployeeAppraisalStorage()" >{{getTranslation('Back to list')}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+            <div class="page-header position-relative">
+                <h1>{{selectedEmployee.employeeName}}<small><i class="fa fa-angle-double-right"></i> {{selectedEmployee.status}}</small></h1>
+            </div><!--/page-header-->
+
+            <div class="row" ng-repeat="area in selectedAppraisalStorage.areasOverview" style="padding: 0 15px;">
+
+                <h3 class="header smaller lighter green" ng-bind="area.areaSubject"></h3>
+
+                <div class="row" ng-repeat="behaviour in area.behaviours">
+                    <div class="row" >
+                        <div class="col-md-9">
+                            <p><b ng-bind="behaviour.behaviourSubject"></b></p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="rating-button" style="background-color: {{behaviour.behaviourValueColor}};"
+                                 ng-bind="behaviour.behaviourValueDescription">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p ng-bind="behaviour.behaviourNotes"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

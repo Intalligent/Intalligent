@@ -1,0 +1,368 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <a class="btn btn-link pull-left" href="/home/#/employees" >{{getTranslation('Back to employees list')}}</a>
+        <!--<button ng-hide="stateParam" class="btn btn-link pull-left  hand-cursor" ng-click="getEmployees()" >{{getTranslation('Back to employees list')}}</button>-->
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <div class="page-header position-relative row">
+                <div class="col-md-6">
+                    <h1>{{selectedEmployee.employeeName}}</h1>
+                    <p class="employee-position-label">{{selectedEmployee.actualPositionName}}</p>
+                </div>
+                <div class="col-md-6" style="text-align: right;" >
+                    <button class="btn btn-xs btn-inverse hand-cursor" ng-click="editEmployee(selectedEmployee._id)"
+                            tooltip="{{getTranslation('Click here to modify this employee')}}" ng-bind="getTranslation('Edit')"
+                            ng-show="restrictRole(['52988ac5df1fcbc201000008', '5327d7ef9c3b0f7801acda0d'])">
+                    </button>
+
+                    <button class="btn btn-xs btn-danger hand-cursor" ng-click="deleteEmployee(selectedEmployee._id)"
+                            tooltip="{{getTranslation('Click here to permanently delete this employee')}}" ng-bind="getTranslation('Delete')"
+                            ng-show="restrictRole(['52988ac5df1fcbc201000008', '5327d7ef9c3b0f7801acda0d'])">
+                    </button>
+                </div>
+            </div><!--/page-header-->
+
+            <div class="row">
+
+                <div class="col-md-2">
+
+                    <div class="rate-box" ng-class="{'rate-red':selectedEmployee.topPerformerRating < 5, 'rate-green':selectedEmployee.topPerformerRating >= 5, 'rate-grey':selectedEmployee.topPerformerRating == 0}">
+                        <p ng-hide="selectedEmployee.topPerformerRating == 0">{{(selectedEmployee.topPerformerRating) ? selectedEmployee.topPerformerRating : 0}}</p>
+                    </div>
+
+                    <!--<div class="rating-disabled general-rating" data-average="4" style="height: 20px; width: 230px; overflow: hidden; z-index: 1; position: relative;">
+                        <div class="jRatingColor undefined" style="width: 92px;"></div><div class="jRatingAverage" style="width: 0px; top: -20px;"></div><div class="jStar" style="width: 230px; height: 20px; top: -40px; background-image: url(assets/img/jrating/stars.png); background-position: initial initial; background-repeat: repeat no-repeat;"></div>
+                    </div>
+
+                    <div class="general-rating">
+                        <div class="rating-disabled-medium" data-average="3.6" style="height: 15px; width: 170px; overflow: hidden; z-index: 1; position: relative;"><div class="jRatingColor undefined" style="width: 61.199999999999996px;"></div><div class="jRatingAverage" style="width: 0px; top: -15px;"></div><div class="jStar" style="width: 170px; height: 15px; top: -30px; background-image: url(http://mispoliticos.com/img/jrating/medium.png); background-position: initial initial; background-repeat: repeat no-repeat;"></div></div>
+                    </div> -->
+
+                    <img class="" alt="" ng-src="{{(selectedEmployee.employeeImage) ? selectedEmployee.employeeImage : '/assets/img/profile-placeholder.png'}}" style="width: 100%;">
+
+                </div>
+
+                <div class="col-md-5">
+                    <h4 ng-bind="getTranslation('Analytics Measure')"></h4>
+
+                    <div id="ratingsArea" style="margin-bottom: 20px;" ng-init="loadEmployeeAnalyticsMeasureLevel()">
+                        <p class="alert alert-danger" ng-bind="getTranslation('This employee has no evaluations!')" style="display: none;">
+                            <i class="fa fa-warning"></i>
+                        </p>
+                        <p class="loader">
+                            <img src="/images/loading.gif">
+                        </p>
+                    </div>
+
+                    <a class="btn btn-success btn-xs" style="width: 100%;" ng-show="selectedEmployee.evaluable" href="/home/#/evaluations/evaluate/employee/{{selectedEmployee._id}}">{{getTranslation('Evaluate')}}</a>
+
+            	</div>
+
+                <div class="col-md-5">
+
+                    <ul style="list-style: none; margin: 0 0 10px 5px;">
+                        <li>
+                            <small>
+                                <span ng-show="selectedEmployee.status == 'Active'" class="badge badge-success" ng-bind="getTranslation(selectedEmployee.status)"></span>
+                                <span ng-show="selectedEmployee.status == 'Temporary Leave'" class="badge" ng-bind="getTranslation(selectedEmployee.status)"></span>
+                                <span ng-show="selectedEmployee.status == 'Out of the Company'" class="badge badge-danger" ng-bind="getTranslation(selectedEmployee.status)"></span>
+                            </small>
+                        </li>
+
+                        <br>
+
+                        <li><strong ng-bind="getTranslation('Code:')"></strong> {{selectedEmployee.employeeCode}}</li>
+                        <li><strong ng-bind="getTranslation('Name:')"></strong> {{selectedEmployee.employeeName}}</li>
+                        <li><strong ng-bind="getTranslation('Gender:')"></strong> {{getTranslation(selectedEmployee.sex)}}</li>
+
+                        <br>
+
+                        <li><strong ng-bind="getTranslation('Unit:')"></strong>
+                            <span>{{selectedEmployee.idunit}}</span>
+                        </li>
+                        <li><strong ng-bind="getTranslation('Department:')"></strong>
+                            <span>{{selectedEmployee.actualDepartmentName}}</span>
+                        </li>
+                        <li><strong ng-bind="getTranslation('Position:')"></strong>
+                            <span>{{selectedEmployee.actualPositionName}}</span>
+                            <i ng-show="!selectedEmployee.actualPositionName || selectedEmployee.actualPositionName == ''">
+                                <i class="fa fa-warning"></i>
+                                <span class="text-danger" ng-bind="getTranslation('This employee has no position assigned')"></span>
+                            </i>
+                        </li>
+                        <li><strong ng-bind="getTranslation('Email:')"></strong> <a href="mailTo:{{selectedEmployee.emailAddress}}" target="_blank">{{selectedEmployee.emailAddress}}</a></li>
+
+                        <br>
+                        <li><strong ng-bind="getTranslation('Number of evaluations:')"></strong> {{(selectedEmployee.numberOfEvaluations) ? selectedEmployee.numberOfEvaluations : 0}}</li>
+                    </ul>
+
+                    <h4 ng-bind="getTranslation('Auto Evaluation')"></h4>
+
+                    <p class="alert alert-danger" ng-bind="getTranslation('You don´t have any evaluations yet')" ng-hide="selectedEmployee.topPerformerAutoRating">
+                        <i class="fa fa-warning"></i>
+                    </p>
+
+                    <div ng-show="selectedEmployee.topPerformerAutoRating" class="row">
+
+                        <div  class="col-md-4">
+
+                            <div class="rate-box" ng-class="{'rate-red':selectedEmployee.topPerformerAutoRating < 5, 'rate-green':selectedEmployee.topPerformerAutoRating >= 5, 'rate-grey':selectedEmployee.topPerformerAutoRating == 0}">
+                                <p ng-hide="selectedEmployee.topPerformerAutoRating == 0">{{(selectedEmployee.topPerformerAutoRating) ? selectedEmployee.topPerformerAutoRating : 0}}</p>
+                            </div>
+
+                        </div>
+
+                        <div  class="col-md-8" ng-init="loadEmployeeAutoAppraisalStorage()">
+
+                            <p class="lbl evaluation-history-date hand-cursor" ng-bind="autoAppraisalStorage.appraisalEndDate  | date:'medium'"></p>
+
+                            <div class="pull-right" style="margin-right: 15px;">
+                                <span class="percent" ng-bind="autoAppraisalStorage.appraisalPercent"></span>%
+                            </div>
+
+                            <div class="pull-right" style="margin-top: 40px;">
+
+                                <a class="hand-cursor" href="/home/#/evaluations/auto-evaluation-analysis/employee/{{selectedEmployee._id}}">{{getTranslation('Comparative Analysis')}}</a>
+                                |
+                                <a class="hand-cursor" href="/home/#/evaluations/view-auto-evaluation/employee/{{autoAppraisalStorage._id}}">{{getTranslation('View Autoevaluation')}}</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+                            <h5>
+                                {{getTranslation('Areas Evolution')}}
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div id="areas-evolution" class="widget-main">
+
+                                <p class="loader">
+                                    <img src="/images/loading.gif">
+                                </p>
+
+                                <p class="text-danger" ng-bind="getTranslation('Sorry, there are no evaluations!')" style="display: none;" ></p>
+
+                                <div id="areas-graph" class="chart" style="display: none;" ng-init="loadEmployeeAnalyticsAreasEvolution()"></div>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+                            <h5>
+                                {{getTranslation('TP Evolution')}}
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div id="tp-evolution" class="widget-main">
+
+                                <p class="loader">
+                                    <img src="/images/loading.gif">
+                                </p>
+
+                                <p class="text-danger" ng-bind="getTranslation('Sorry, there are no evaluations!')" style="display: none;" ></p>
+
+                                <div id="tp-graph" class="chart" style="display: none;" ng-init="loadEmployeeAnalyticsTPEvolution()"></div>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+                            <h5>
+                                {{getTranslation('Last Evaluations To')}}
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main">
+
+                                <div id="last-evaluations-to" class="tab-pane active">
+
+                                    <p class="loader">
+                                        <img src="/images/loading.gif">
+                                    </p>
+
+                                    <p class="text-danger" ng-bind="getTranslation('Sorry, there are no evaluations!')" style="display: none;" >
+
+                                    </p>
+
+                                    <ul class="employee-list item-list" ng-init="loadEmployeeAppraisalStorageTo()">
+
+                                        <li class="item-orange clearfix hand-cursor" ng-repeat="appraisalStorage in toMyAppraisalStorages">
+                                            <a class="evaluation-preview-box" href="/home/#/evaluations/view-evaluation/employee/{{appraisalStorage._id}}">
+                                                <p class="lbl" ng-bind="appraisalStorage.appraisalByEmployeeName"></p>
+                                                <p class="lbl evaluation-history-date" ng-bind="appraisalStorage.appraisalEndDate  | date:'medium'"></p>
+
+                                                <div class="pull-right" style="margin-top: -10px;">
+                                                    <span class="percent" ng-bind="appraisalStorage.appraisalPercent"></span>%
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <p ng-show="toMyAppraisalStorages && toMyAppraisalStorages.length > 4" class="text-right" id="showAllToEmployee">
+                                    <!--<a class="hand-cursor" ng-click="showAllAppraisalStorages('toEmployee')">show all</a>-->
+                                    <a class="hand-cursor" href="/home/#/appraisal-storage/to/{{selectedEmployee._id}}" ng-bind="getTranslation('show all')"></a>
+                                </p>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+                            <h5>
+                                {{getTranslation('Last Evaluations By')}}
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main">
+
+                                <div id="last-evaluations-by" class="tab-pane active">
+
+                                    <p class="loader">
+                                        <img src="/images/loading.gif">
+                                    </p>
+
+                                    <p class="text-danger" ng-bind="getTranslation('Sorry, there are no evaluations!')" style="display: none;" >
+
+                                    </p>
+
+                                    <ul class="employee-list item-list" ng-init="loadEmployeeAppraisalStorageBy()">
+
+                                        <li class="item-blue clearfix hand-cursor" ng-repeat="appraisalStorage in byMyAppraisalStorages">
+                                            <a class="evaluation-preview-box" href="/home/#/evaluations/view-evaluation/employee/{{appraisalStorage._id}}">
+                                                <p class="lbl" ng-bind="appraisalStorage.appraisalToEmployeeName"></p>
+                                                <p class="lbl evaluation-history-date" ng-bind="appraisalStorage.appraisalEndDate  | date:'medium'"></p>
+
+                                                <div class="pull-right" style="margin-top: -10px;">
+                                                    <span class="percent" ng-bind="appraisalStorage.appraisalPercent"></span>%
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <p ng-show="byMyAppraisalStorages && byMyAppraisalStorages.length > 4" class="text-right" id="showAllByEmployee">
+                                    <!--<a class="hand-cursor" ng-click="showAllAppraisalStorages('byEmployee')">show all</a>-->
+                                    <a class="hand-cursor" href="/home/#/appraisal-storage/by/{{selectedEmployee._id}}" ng-bind="getTranslation('show all')"></a>
+                                </p>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6">
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+
+                            <h5>
+                                {{getTranslation('Action Plan for')}} {{selectedEmployee.employeeName}}
+                                <span style="float: right; margin: 0 6px;">{{employeeActionsPercentCompleted}}%</span>
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main">
+
+                                <div id="action-plans" class="tab-pane active">
+
+                                    <p class="loader">
+                                        <img src="/images/loading.gif">
+                                    </p>
+
+                                    <p class="text-danger" ng-bind="getTranslation('Sorry, there are no action plans!')" style="display: none;" >
+
+                                    </p>
+
+                                    <ul class="employee-list item-list" ng-init="loadIncompleteEmployeeActionPlans()">
+
+                                        <li class="item-orange clearfix hand-cursor" ng-repeat="actionPlan in employeeActionPlans">
+                                            <a class="evaluation-preview-box" href="/home/#/action-plans/view/employee/{{actionPlan._id}}">
+                                                <p class="lbl">
+                                                    {{actionPlan.actionPlanDescription}}
+                                                    <small>
+                                                        <span ng-show="actionPlan.status == 1" class="badge badge-danger" ng-bind="getTranslation('Not initialized')"></span>
+                                                        <span ng-show="actionPlan.status == 2" class="badge" ng-bind="getTranslation('In progress')"></span>
+                                                    </small>
+                                                </p>
+                                                <p class="lbl evaluation-history-date" ng-bind="actionPlan.startDate  | date:'medium'"></p>
+
+                                                <div class="pull-right" style="margin-top: -10px;">
+                                                    <span class="percent" ng-bind="actionPlan.percentCompleted"></span>%
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <p class="text-right" ng-show="employeeActionPlans.length > 0">
+                                    <a class="hand-cursor" ng-hide="employeeActionsCanManage" href="/home/#/action-plans/view-all/employee/{{selectedEmployee._id}}" ng-bind="getTranslation('view all')"></a>
+                                </p>
+
+                                <p class="text-right" ng-show="employeeActionsCanManage">
+                                    <a class="hand-cursor" ng-show="employeeActionsCanManage" href="/home/#/action-plans/manage/employee/{{selectedEmployee._id}}" ng-bind="getTranslation('Manage Actions')"></a>
+                                </p>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

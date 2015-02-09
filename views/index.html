@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="nodedream">
+<head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Intalligent</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/template.css">
+
+    <!--[if lt IE 9]>
+    <script src="/js/lib/html5shiv.js"></script>
+    <script src="/js/lib/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+    <script>
+        document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+
+        // Optionally these for CSS
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+    </script>
+    <![endif]-->
+</head>
+<body style="padding-top: 90px;">
+<div class="navbar-wrapper">
+    <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top main-nav" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="fa fa-bars"></span>
+                        <span class="fa fa-bars"></span>
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <a href="http://www.intalligent.com"><img src="images/custom/intalligentLogoSimple.png" style="height: 40px;margin-top: 5px;"/></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="http://www.intalligent.com">Home</a></li>
+                        <li><a href="/">Login</a></li>
+                        <!-- do not remove or edit this line --> <!-- ##NODE_DREAM_CUSTOM_CONTROLLERS_MENU## -->
+                        <!--<ul class="nav navbar-nav"> <li><a class="btn btn-warning" href="/home/#/nddesigner/new">+</a></li></ul>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div ui-view></div>
+
+<div class="container" style="margin-top: 10px;">
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 - <a href="http://www.db-team.com/">DBTeam</a></p>
+    </footer>
+</div>
+
+<!--[if !IE]> -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/js/lib/jquery/jquery-2.0.3.min.js'>"+"<"+"/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/js/lib/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script src="/js/lib/jquery/jquery.validate.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/lib/angular/angular.min.js"></script>
+<script src="/js/lib/angular/angular-ui-router.min.js"></script>
+<script src="/js/lib/noty/jquery.noty.js"></script>
+<script type="text/javascript" src="/js/lib/noty/layouts/top.js"></script>
+<script src="/js/lib/noty/themes/default.js"></script>
+<script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+<script src="/js/lib/angular/angular-recaptcha.min.js"></script>
+
+<script src="/js/lib/mbExtruder/jquery.hoverIntent.min.js"></script>
+<script src="/js/lib/mbExtruder/jquery.mb.flipText.js"></script>
+<script src="/js/lib/mbExtruder/mbExtruder.js"></script>
+
+<script src="/js/appRun.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/services.js"></script>
+<script src="/js/controllers.js"></script>
+<script src="/js/filters.js"></script>
+<script src="/js/directives.js"></script>
+
+<!-- do not remove or edit this line --> <!--##NODE_DREAM_CUSTOM_PUBLIC_CONTROLLERS##*/-->
+
+</body>
+</html>

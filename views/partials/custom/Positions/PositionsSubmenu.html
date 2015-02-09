@@ -1,0 +1,65 @@
+<div class="sidebar" id="sidebar" role="complementary">
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    </script>
+
+    <ul class="nav nav-list">
+
+        <li>
+            <a href="/home/#/positions" ng-bind="getTranslation('Positions')"></a>
+        </li>
+
+        <li>
+            <a ng-click="getAreas()" ng-bind="getTranslation('Areas')" ng-show="selectedPosition" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getBehaviours()" ng-bind="getTranslation('Behaviours')" ng-show="selectedPosition && selectedArea" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getActionPlans('areas')" ng-bind="getTranslation('Action Plans')" ng-show="selectedPosition && selectedArea && !selectedBehaviour" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getTargets('areas')" ng-bind="getTranslation('Targets')" ng-show="selectedPosition && selectedArea && !selectedBehaviour" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getRatingConfigurations()" ng-bind="getTranslation('Rating Configurations')" ng-show="selectedPosition && selectedArea && selectedBehaviour" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getActionPlans('ratingConfiguration')" ng-bind="getTranslation('Action Plans')" ng-show="selectedPosition && selectedArea && selectedBehaviour && selectedRatingConfiguration" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getTargets('ratingConfiguration')" ng-bind="getTranslation('Targets')" ng-show="selectedPosition && selectedArea && selectedBehaviour && selectedRatingConfiguration" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getURLs('targets')" ng-bind="getTranslation('URLs')" ng-show="selectedPosition && selectedArea && selectedBehaviour && selectedRatingConfiguration && selectedTarget" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getDocuments('targets')" ng-bind="getTranslation('URLs')" ng-show="selectedPosition && selectedArea && selectedBehaviour && selectedRatingConfiguration && selectedTarget" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getURLs('actionPlan')" ng-bind="getTranslation('URLs')" ng-show="selectedPosition && selectedArea && selectedBehaviour && selectedRatingConfiguration && selectedActionPlan" class="hand-cursor"></a>
+        </li>
+
+        <li>
+            <a ng-click="getDocuments('actionPlan')" ng-bind="getTranslation('URLs')" ng-show="selectedPosition && selectedArea && selectedBehaviour && selectedRatingConfiguration && selectedActionPlan" class="hand-cursor"></a>
+        </li>
+
+    </ul><!-- /.nav-list -->
+
+    <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="fa fa-angle-double-left" data-icon1="fa fa-angle-double-left" data-icon2="fa fa-angle-double-right"></i>
+    </div>
+
+    <script type="text/javascript">
+        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+    </script>
+</div>

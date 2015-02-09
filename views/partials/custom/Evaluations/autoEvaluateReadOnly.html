@@ -1,0 +1,45 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <a ng-show="from == 'employee'" class="btn btn-link pull-left hand-cursor" href="/home/#/employees/{{selectedEmployee._id}}">{{getTranslation('Back to')}} {{selectedEmployee.employeeName}}</a>
+        <a ng-show="from == 'profile'" class="btn btn-link pull-left hand-cursor" href="/home/#/my-employee-profile">{{getTranslation('Back to my profile')}}</a>
+    </div>
+
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+            <div class="page-header position-relative">
+                <h1>{{selectedEmployee.employeeName}}<small><i class="fa fa-angle-double-right"></i> {{selectedEmployee.status}}</small></h1>
+            </div><!--/page-header-->
+
+            <div class="row" ng-repeat="area in selectedAutoAppraisalStorage.areasOverview" style="padding: 0 15px;">
+
+                <h3 class="header smaller lighter green" ng-bind="area.areaName"></h3>
+
+                <div class="row" ng-repeat="behaviour in area.behaviours">
+                    <div class="row" >
+                        <div class="col-md-9">
+                            <p><b ng-bind="behaviour.behaviourSubject"></b></p>
+                        </div>
+                        <div class="col-md-3" id="{{behaviour._id}}">
+                            <div class="rating-button" style="background-color: {{behaviour.behaviourValueColor}};"
+                                 ng-bind="behaviour.behaviourValueDescription">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p ng-bind="behaviour.behaviourNotes"></p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,83 @@
+<div ng-include src="submenu"></div>
+
+<aside class="right-side" ng-init="getUsers()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home">Home</a>
+            </li>
+            <li>
+                <a href="/home/#/admin">Admin</a>
+            </li>
+            <li class="active">Users</li>
+        </ul><!-- .breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search" ng-submit="getUsers(1, adminUsersModel.data.search)">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" autocomplete="off" ng-model="adminUsersModel.data.search">
+                    <i class="icon-search fa fa-search"></i>
+                    <button type="button" class="btn btn-xs btn-info btn-search" data-toggle="button" ng-click="getUsers(1, adminUsersModel.data.search)">Search</button>
+                </span>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                Users
+                <small>
+                    <i class="fa fa-double-angle-right"></i>
+                    <a href="/home/#/admin/users/add">Add New</a> |
+                    <a href="/home/#/admin/users/change-user">Change User</a>
+                </small>
+            </h1>
+        </div><!-- /.page-header -->
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-row" ng-repeat="user in adminUsersModel.data.users" id="{{user._id}}">
+                <td>{{user._id}}</td>
+                <td>
+                    <span id="{{user._id}}-status-1" ng-show="user.status == 1" class="fa fa-check-square-o hand-cursor" ng-click="setStatus(user._id, 0)"></span>
+                    <span id="{{user._id}}-status-0" ng-show="user.status == 0" class="fa fa-square-o hand-cursor" ng-click="setStatus(user._id, 1)"></span>
+                </td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td class="table-actions-cell">
+                    <a href="/home/#/admin/users/edit/{{user._id}}" class="btn btn-xs btn-info">
+                        <i class="fa fa-edit bigger-120"></i>
+                    </a>
+                    <a class="hand-cursor btn btn-xs btn-danger" ng-click="deleteUser(user._id)">
+                        <i class="fa fa-trash-o bigger-120"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul class="pagination pull-right" ng-show="adminUsersModel.data.pages > 1">
+            <li ng-class="{disabled:page==1}"><a ng-click="getUsers(Number(page)-1)" class="hand-cursor">&laquo;</a></li>
+            <li ng-repeat="n in [] | range:adminUsersModel.data.pages" ng-class="{active:page==$index+1}" ng-show="$index+1 < Number(page)+5 && $index+1 > Number(page)-5">
+                <a ng-click="getUsers({{$index+1}})" class="hand-cursor">{{$index+1}}</a>
+            </li>
+            <li ng-class="{disabled:page==adminUsersModel.data.pages}"><a ng-click="getUsers(Number(page)+1)" class="hand-cursor">&raquo;</a></li>
+        </ul>
+
+    </div>
+</aside>
+
+<div ng-include src="deleteModal"></div>

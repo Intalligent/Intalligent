@@ -1,0 +1,43 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="row">
+        <form class="simple-form" role="form" name="Units_form">
+            <fieldset>
+
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                        <div class="col-sm-12">
+                            <div class="form-group" ng-class="{'has-error':Units_form.unit.$invalid}">
+                                <label for="unit">{{getTranslation("unit")}}</label>
+                                <input type="text" class="form-control" name="unit" id="unit" placeholder="" ng-model="_Units.unit" required>
+                                <span ng-show="Units_form.unit.$invalid" class="help-inline">{{getTranslation("Field Unit is required")}}</span>
+                           </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group" ng-class="{'has-error':Units_form.brand.$invalid}">
+                                <label ng-bind="getTranslation('Brand')"></label>
+                                <select  name="brand" id="brand" class="form-control" ng-model="_Units.brand" ng-options="obj._id as obj.brand for obj in brands" required></select>
+                                <span ng-show="Units_form.brand.$invalid" class="help-inline">{{getTranslation("Field Brand is required")}}</span>
+                            </div>
+                        </div>
+
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="Units_form.$invalid  || Units_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_Units)">{{getTranslation("Save")}}</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>

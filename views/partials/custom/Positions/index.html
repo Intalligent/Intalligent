@@ -1,0 +1,31 @@
+<aside class="right-side full-page" ng-init="getPositions()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home" ng-bind="getTranslation('Home')"></a>
+            </li>
+
+            <li>
+                <a class="hand-cursor" ng-click="getPositions()" ng-bind="getTranslation('Positions')"></a>
+            </li>
+
+        </ul><!-- .breadcrumb -->
+        <div class="nav-search" id="nav-search" ng-show="!selectedPosition">
+
+            <form class="form-search" ng-submit="getPositions(1, PositionsModel.data.search)">
+                <span class="input-icon">
+                    <input type="text" placeholder="{{getTranslation('Search')}}..." class="nav-search-input" autocomplete="off" ng-model="PositionsModel.data.search">
+                    <button type="button" class="btn btn-xs btn-info btn-search" data-toggle="button" ng-click="getPositions(1, PositionsModel.data.search)" ng-bind="getTranslation('Search')"></button>
+                </span>
+            </form>
+        </div>
+
+    </div>
+
+    <div ng-include src="subPage"></div>
+
+</aside>
+
+<div ng-include src="deleteModal"></div>

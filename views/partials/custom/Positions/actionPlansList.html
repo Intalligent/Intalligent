@@ -1,0 +1,85 @@
+<div class="panel panel-info" >
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+                        <span class="badge badge-info hand-cursor" tooltip="{{getTranslation('Click here to get more info about action plans for a position area')}}">
+                        ?
+                        </span>
+                        {{getTranslation('Action plan for')}} <strong style="color:black">{{selectedArea.areaName}}</strong>
+        <button class="btn btn-link pull-right hand-cursor" ng-click="addActionPlan()">{{getTranslation('Add new')}}</button>
+    </div>
+
+    <div class="panel-body">
+
+
+        <div class="alert alert-danger" ng-hide="actionPlans">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times bigger-125"></i>
+            </button>
+            <i class="fa  fa-warning bigger-300" style="color:black"></i> {{getTranslation('OOPPS! seems that you don´t have any action defined yet... ')}}
+            <button class="btn btn-link radius-4 hand-cursor " ng-click="addActionPlan()">{{getTranslation('Add new action')}}</button>
+            <br>
+            {{getTranslation('...Or maybe you will like to have more information about action plans?, if so, click ')}} <a href="#" >{{getTranslation('here')}}</a>  {{getTranslation('to get more info.')}}
+
+        </div>
+
+        <table class="table">
+            <tbody ui-sortable="sortableOptions" ng-model="selectedArea.actionPlan">
+            <tr class="table-row" ng-repeat="actionPlan in actionPlans">
+                <td style="width: 20px;"><i class="sortable-handle fa fa-bars" tooltip="{{getTranslation('Drag and drop the action plan to reorder')}}"></i></td>
+                <td class="visible-md visible-lg hidden-sm hidden-xs" style="width: 140px;">
+                    <div class="btn-group">
+                        <button class="btn btn-xs btn-link hand-cursor" ng-click="editActionPlan(actionPlan)" tooltip="{{getTranslation('Click here to modify this action')}}">
+                            <i class="fa fa-edit bigger-140" style="color:black"></i>
+                        </button>
+                        <button class="hand-cursor btn btn-xs btn-link" ng-click="deletePositionItem('actionPlans', actionPlan)" tooltip="{{getTranslation('Click here to permanently delete this action')}}">
+                            <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                        </button>
+                    </div>
+                </td>
+                <td  class="visible-xs visible-sm hidden-md hidden-lg" style="width: 1px;">  <!-- buttons for mobile -->
+                    <div>
+                        <div class="inline position-relative">
+                            <button class="btn btn-minier btn-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-caret-square-o-down bigger-140" style="color:black"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                <li>
+                                    <button class="btn btn-xs btn-link hand-cursor" ng-click="editActionPlan(actionPlan)" tooltip="{{getTranslation('Click here to modify this action')}}">
+                                        <i class="fa fa-edit bigger-140" style="color:black"></i>
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button class="hand-cursor btn btn-xs btn-link" ng-click="deletePositionItem('actionPlans', actionPlan)" tooltip="{{getTranslation('Click here to permanently delete this action')}}">
+                                        <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td class="visible-md visible-lg hidden-sm hidden-xs"  style="width: 100px;">
+                     <span ng-show="!actionPlan.draft && actionPlan.status == 1" class="badge badge-info  hand-cursor" ng-click="setStatus(actionPlan, 2)" tooltip="{{getTranslation('This Action Plan is active, click here to deactivate')}}">
+                              {{getTranslation('active')}}
+                     </span>
+                     <span ng-show="!actionPlan.draft && actionPlan.status == 2" class="badge badge-default  hand-cursor" ng-click="setStatus(actionPlan, 1)" tooltip="{{getTranslation('This Action Plan is not active, click here to activate')}}">
+                              {{getTranslation('not active')}}
+                     </span>
+                </td>
+
+                <td class="visible-xs visible-sm hidden-md hidden-lg" style="width: 1px;">  <!-- for mobile -->
+                     <span ng-show="!actionPlan.draft && actionPlan.status == 1" class="badge badge-info  hand-cursor" ng-click="setStatus(actionPlan, 2)" tooltip="{{getTranslation('This Action Plan is active, click here to deactivate')}}">
+                              &nbsp;
+                     </span>
+                     <span ng-show="!actionPlan.draft && actionPlan.status == 2" class="badge badge-default  hand-cursor" ng-click="setStatus(actionPlan, 1)" tooltip="{{getTranslation('This Action Plan is not active, click here to activate')}}">
+                              &nbsp;
+                     </span>
+                </td>
+
+                <td class="hand-cursor" ng-click="editActionPlan(actionPlan)">{{actionPlan.actionPlanDescription}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

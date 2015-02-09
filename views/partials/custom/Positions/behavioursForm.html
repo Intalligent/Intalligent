@@ -1,0 +1,86 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left" ng-click="editArea(selectedArea)" >{{getTranslation('Back to')}} <strong style="color:black">{{selectedArea.areaName}}</strong></button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <form id="Behaviours-form" name="Behaviours-form" role="form">
+                <div class="row" ng-form="BehavioursForm">
+                    <div class="col-md-6 col-xs-12">
+                        <!--<div class="form-group">
+                            <label ng-bind="getTranslation('Status')"></label>
+                            <select name="status" class="form-control" ng-model="selectedBehaviour.status" ng-options="obj.value as obj.name for obj in statuses"></select>
+                        </div>-->
+                        <div class="form-group" ng-class="{'has-error':BehavioursForm.behaviourName.$invalid}">
+                            <label ng-bind="getTranslation('Behaviour Name')"></label>
+                            <textarea name="behaviourName" type="text" class="form-control required" ng-model="selectedBehaviour.behaviourName" ng-required="true" required></textarea>
+                            <span ng-show="BehavioursForm.behaviourName.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                        </div>
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Behaviour Description')"></label>
+                            <textarea name="behaviourDescription" class="form-control" ng-model="selectedBehaviour.behaviourDescription"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedBehaviour.showBehaviourDescription" ng-true-value="true" ng-false-value="false">
+                            <label ng-bind="getTranslation('Show Behaviour Description')"></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedBehaviour.allowComments" ng-true-value="true" ng-false-value="false">
+                            <label ng-bind="getTranslation('Allow Comments')"></label>
+                        </div>
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Report Comments')"></label>
+                            <textarea name="reportComments" class="form-control" ng-model="selectedBehaviour.reportComments"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedBehaviour.showReportComments" ng-true-value="true" ng-false-value="false">
+                            <label ng-bind="getTranslation('Show Report Comments')"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Item Type')"></label>
+                            <select name="itemType" class="form-control" ng-model="selectedBehaviour.itemType" ng-options="obj.value as obj.name for obj in behaviourItemType"></select>
+                        </div>
+                        <!--<div class="form-group">
+                            <label ng-bind="getTranslation('Item Subtype')"></label>
+                            <input name="itemSubtype" type="text" class="form-control" ng-model="selectedBehaviour.itemSubtype">
+                        </div>-->
+                        <div class="form-group" ng-show="selectedBehaviour.itemType == 1">
+                            <label ng-bind="getTranslation('Rating View Type')"></label>
+                            <select name="ratingViewType" class="form-control" ng-model="selectedBehaviour.ratingViewType" ng-options="obj.value as obj.name for obj in behaviourRatingViewType"></select>
+                        </div>
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Behaviour Competence')"></label>
+                            <select name="status" class="form-control" ng-model="selectedBehaviour.behaviourCompetence" ng-options="obj._id as obj.competency for obj in competencies"></select>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedBehaviour.mandatory">
+                            <label ng-bind="getTranslation('Mandatory')"></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedBehaviour.notApplicable">
+                            <label ng-bind="getTranslation('Not Applicable')"></label>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedBehaviour.behaviourWeightActive" ng-change="selectedBehaviour.behaviourWeight = ''">
+                            <label ng-bind="getTranslation('Behaviour Weight Active')"></label>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':selectedBehaviour.behaviourWeightActive&& BehavioursForm.behaviourWeight.$invalid}" ng-show="selectedBehaviour.behaviourWeightActive">
+                            <label ng-bind="getTranslation('Behaviour Weight')"></label>
+                            <input name="behaviourWeight" type="number" class="form-control" ng-model="selectedBehaviour.behaviourWeight" min="0" max="99" ng-required="selectedBehaviour.behaviourWeightActive">
+                            <span ng-show="selectedBehaviour.behaviourWeightActive && BehavioursForm.behaviourWeight.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary pull-right" ng-click="saveBehaviour(selectedBehaviour)" ng-bind="getTranslation('Save')"
+                        ng-disabled="BehavioursForm.$invalid || BehavioursForm.$pristine"></button>
+            </form>
+        </div>
+    </div>
+    <div ng-include src="ratingConfigurationsList" ng-show="mode == 'update' && selectedBehaviour.itemType == 1" ng-init="getRatingConfigurations()"></div>
+
+</div>

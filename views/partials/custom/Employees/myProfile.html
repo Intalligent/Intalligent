@@ -1,0 +1,20 @@
+<div class="main-content full-page" ng-init="getMyEmployeeProfile()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home" ng-bind="getTranslation('Home')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/my-employee-profile" ng-bind="getTranslation('My Profile')"></a>
+            </li>
+
+        </ul><!-- .breadcrumb -->
+
+    </div>
+
+    <div ng-include src="subPage"></div>
+
+</div>

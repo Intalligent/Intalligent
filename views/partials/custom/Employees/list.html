@@ -1,0 +1,169 @@
+<section class="content">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    <img src="/images/custom/employees.png" width="50px" height="50px" />
+                </h3>
+            </div>
+            <div class="col-md-6 list-header-buttons" style="text-align: right;" ng-show="restrictRole(['52988ac5df1fcbc201000008', '5327d7ef9c3b0f7801acda0d'])">
+                <a ng-click="addEmployee()" class="hand-cursor">{{getTranslation('Add new employee')}}</a> |
+                <a href="/home/#/loader/employees" ng-bind="getTranslation('Employee Import')" ng-show="restrictRole(['52988ac5df1fcbc201000008', '5327d7ef9c3b0f7801acda0d'])"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning" ng-show="data.items.length == 0">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times bigger-125"></i>
+        </button>
+        <i class="fa  fa-warning bigger-300" style="color:black"></i> &nbsp; &nbsp;
+        <div>
+            <strong ng-show="!search">{{getTranslation('OOPPS! Probably do not have privileges to see or evaluate other employees...')}} </strong>
+            <strong ng-show="search">{{getTranslation('Sorry there are no employees that match your search criteria')}} </strong>
+        </div>
+        <br>
+    </div>
+
+    <div ng-show="data.items.length > 0">
+
+        <div class="alert alert-warning" ng-show="errorMsg">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times bigger-125"></i>
+            </button>
+            <i class="fa  fa-warning bigger-300" style="color:black"></i> &nbsp; &nbsp;
+            <div>
+                <strong ng-bind="errorMsg"></strong>
+            </div>
+        </div>
+
+        <div class="widget-box">
+
+        <div class="widget-header widget-header-flat widget-header-small">
+            <i class="fa fa-refresh hand-cursor" ng-click="getEmployees(1)" tooltip="{{getTranslation('Refresh')}}"></i>
+            <i class="fa fa-filter hand-cursor" ng-click="toggleFilters()" tooltip="{{getTranslation('Filters')}}" style="margin-left: 5px;"></i>
+            <div class="pull-right">
+                <div class="input select">
+                    <select name="employees-order" id="employees-order" ng-model="orderBySelect" ng-change="getEmployees(1, null, orderBySelect)">
+                        <option value="topPerformerRating" ng-selected="orderBy == 'topPerformerRating'">{{getTranslation('TP Rating')}}</option>
+                        <option value="employeeName" ng-selected="orderBy == 'employeeName'">{{getTranslation('Employee Name')}}</option>
+                        <option value="idunit" ng-selected="orderBy == 'idunit'">{{getTranslation('Employee Unit')}}</option>
+                        <option value="actualPositionName" ng-selected="orderBy == 'actualPositionName'">{{getTranslation('Position')}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pull-right">
+                <label ng-bind="getTranslation('Order By:')" style="margin-right: 5px;"></label>
+            </div>
+        </div>
+
+        <div class="alert alert-warning filters-main-container" ng-show="showSearch">
+
+            <div class="col-md-12" style="text-align: right;">
+                <a ng-click="toggleFilters()" class="hand-cursor" ng-show="showSearch"><i class="fa fa-times"></i></a>
+            </div>
+
+            <form id="Filters-form" name="Filters-form" role="form">
+                <div class="row" ng-form="FiltersForm">
+                    <div class="row" ng-repeat="filter in filters">
+                        <div class="col-md-4">
+                            <label class="filters-label"><span class="badge badge-inverse filters-badge">1</span>{{getTranslation('Select here a field to filter on')}}</label>
+                            <select class="form-control" ng-model="filter.field" ng-options="obj as obj.label for obj in searchFields" ng-required="false"></select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="filters-label" ng-show="filter.field"><span class="badge badge-inverse filters-badge">2</span>{{getTranslation('Select here the operator for the filter')}}</label>
+                            <select class="form-control" ng-model="filter.condition" ng-options="obj.condition as obj.label for obj in searchConditions['String']" ng-show="filter.field.type == 'String'" ng-required="false"></select>
+                            <select class="form-control" ng-model="filter.condition" ng-options="obj.condition as obj.label for obj in searchConditions['Number']" ng-show="filter.field.type == 'Number'" ng-required="false"></select>
+                            <select class="form-control" ng-model="filter.condition" ng-options="obj.condition as obj.label for obj in searchConditions['Array']" ng-show="filter.field.type == 'Array'" ng-required="false"></select>
+                            <select class="form-control" ng-model="filter.condition" ng-options="obj.condition as obj.label for obj in searchConditions['Boolean']" ng-show="filter.field.type == 'Boolean'" ng-required="false"></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="filters-label" ng-show="filter.field"><span class="badge badge-inverse filters-badge">3</span>{{getTranslation('Select or type the value for the selected field and operator')}}</label>
+                            <input ng-show="filter.field.type == 'String'" type="text" ng-model="filter.value" class="form-control" ng-required="false">
+                            <input ng-show="filter.field.type == 'Number'" type="number" ng-model="filter.value" class="form-control" ng-required="false">
+                            <input ng-show="filter.field.type == 'Boolean'" type="checkbox" ng-model="filter.value" class="form-control" ng-required="false">
+                            <select ng-show="filter.field.name == 'actualPosition'" class="form-control" ng-model="filter.value" ng-options="obj._id as obj.positionName for obj in positions" ng-required="false"></select>
+                            <select ng-show="filter.field.name == 'actualDepartment'" class="form-control" ng-model="filter.value" ng-options="obj._id as obj.department for obj in departments" ng-required="false"></select>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="btn btn-xs btn-error" ng-click="removeFilter(filter)"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: right; padding: 15px 30px 0 0;">
+                            <a class="btn btn-xs btn-info" ng-click="addFilter()" ng-bind="getTranslation('Add Filter')"></a>
+                            <a class="btn btn-xs btn-success" ng-click="applyFilters()" ng-disabled="filters.length == 0" ng-bind="getTranslation('Search')"></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <ul class="employee-list item-list">
+
+            <li ng-class="{'item-red':employee.topPerformerRating < 5, 'item-green':employee.topPerformerRating >= 5, 'item-grey':employee.topPerformerRating == 0}"
+                ng-repeat="employee in data.items" id="{{employee._id}}"  ng-init="setTooltips()">
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="rate-box-list" ng-class="{'rate-red':employee.topPerformerRating < 5, 'rate-green':employee.topPerformerRating >= 5, 'rate-grey':employee.topPerformerRating == 0}">
+                            <p ng-hide="employee.numberOfEvaluations == 0 || !employee.numberOfEvaluations">{{(employee.topPerformerRating) ? employee.topPerformerRating : 0}}</p>
+                            <p ng-show="employee.numberOfEvaluations == 0 || !employee.numberOfEvaluations">-</p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <img class="employee-list-image" alt="" ng-src="{{employee.employeeImage}}">
+                    </div>
+                    <div class="col-md-7">
+                        <label class="inline">
+                            <div class="name"><a href="/home/#/employees/{{employee._id}}">{{employee.employeeName}} ({{employee.employeeCode}})</a></div>
+
+                            <div class="row time">
+                                <div style="float: left; margin: 0 9px;">
+                                    <span ng-show="employee.status == 'Active'" class="badge badge-success" ng-bind="getTranslation(employee.status)"></span>
+                                    <span ng-show="employee.status == 'Temporary Leave'" class="badge" ng-bind="getTranslation(employee.status)"></span>
+                                    <span ng-show="employee.status == 'Out of the Company'" class="badge badge-danger" ng-bind="getTranslation(employee.status)"></span>
+                                </div>
+                            </div>
+
+                            <small>
+                                <span class="label label-sm label-info arrowed-in arrowed-in-right" ng-bind="employee.idunit"></span>
+                                <i class="text-primary">{{employee.actualPositionName}}</i>
+                                <i ng-show="!employee.actualPositionName || employee.actualPositionName == ''">
+                                    <i class="fa fa-warning"></i>
+                                    <span class="text-danger" ng-bind="getTranslation('This employee has no position assigned')"></span>
+                                </i>
+                            </small><br />
+                            <small>{{getTranslation('Number of evaluations')}}: {{(employee.numberOfEvaluations) ? employee.numberOfEvaluations : 0}}</small>
+                        </label>
+                    </div>
+                    <div class="col-md-3" style="padding-top: 23px; text-align: right;">
+                        <a class="btn btn-success btn-xs" ng-show="employee.evaluable" href="/home/#/evaluations/evaluate/employee/{{employee._id}}">{{getTranslation('Evaluate')}}</a>
+
+                            <i ng-show="employee.topPerformerRatingEvolution == 'DOWN'" class="fa fa-arrow-down bigger-140 text-red" style="margin: 0 10px;"></i>
+                            <i ng-show="employee.topPerformerRatingEvolution == 'SAME'" class="text-green" style="margin: 0 10px;font-size: 24px;font-weight: bold;">=</i>
+                            <i ng-show="employee.topPerformerRatingEvolution == 'UP'" class="fa fa-arrow-up bigger-140 text-blue" style="margin: 0 10px;"></i>
+                            <i ng-show="!employee.topPerformerRatingEvolution" class="text-green" style="margin: 0 10px;font-size: 24px;font-weight: bold;"></i>
+
+                    </div>
+                </div>
+
+            </li>
+
+        </ul>
+
+        </div>
+
+        <ul class="pagination pull-right" ng-show="pages > 1">
+            <li ng-class="{disabled:page==1}"><a ng-click="getEmployees(Number(page)-1)" class="hand-cursor">&laquo;</a></li>
+            <li ng-repeat="n in [] | range:pages" ng-class="{active:page==$index+1}" ng-show="$index+1 < Number(page)+5 && $index+1 > Number(page)-5">
+                <a ng-click="getEmployees({{$index+1}})" class="hand-cursor">{{$index+1}}</a>
+            </li>
+            <li ng-class="{disabled:page==pages}"><a ng-click="getEmployees(Number(page)+1)" class="hand-cursor">&raquo;</a></li>
+        </ul>
+
+    </div>
+
+</section>

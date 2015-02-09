@@ -1,0 +1,72 @@
+<div ng-include src="submenu"></div>
+
+<aside class="right-side" ng-init="getLogs()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home">Home</a>
+            </li>
+            <li>
+                <a href="/home/#/admin">Admin</a>
+            </li>
+            <li class="active">Logs</li>
+        </ul><!-- .breadcrumb -->
+
+        <div class="nav-search" id="nav-search">
+            <form class="form-search" ng-submit="getLogs(1, adminLogsModel.data.search)">
+                <span class="input-icon">
+                    <input type="text" placeholder="Search ..." class="nav-search-input" autocomplete="off" ng-model="adminLogsModel.data.search">
+                    <i class="icon-search fa fa-search"></i>
+                    <button type="button" class="btn btn-xs btn-info btn-search" data-toggle="button" ng-click="getLogs(1, adminLogsModel.data.search)">Search</button>
+                </span>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1>
+                Logs
+            </h1>
+        </div><!-- /.page-header -->
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Text</th>
+                <th>User ID</th>
+                <th>IP</th>
+                <th>Created</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-row" ng-repeat="log in adminLogsModel.data.logs" id="{{log._id}}">
+                <td>
+                    <i ng-show="log.type == 101" class="fa fa-user"></i>  <!-- User login -->
+                    <i ng-show="log.type == 102" class="fa fa-warning"></i>  <!-- User fail login -->
+                    <i ng-show="log.type == 103" class="fa fa-asterisk"></i>  <!-- User pwd change -->
+                    <i ng-show="log.type == 104" class="fa fa-user"></i>  <!-- User registration -->
+                    <i ng-show="log.type == 105" class="fa fa-user"></i>  <!-- User activation -->
+                </td>
+                <td>{{log.text}}</td>
+                <td>{{log.user_id}}</td>
+                <td>{{log.ip}}</td>
+                <td>{{log.created}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ul class="pagination pull-right" ng-show="adminLogsModel.data.pages > 1">
+            <li ng-class="{disabled:page==1}"><a ng-click="getLogs(Number(page)-1)" class="hand-cursor">&laquo;</a></li>
+            <li ng-repeat="n in [] | range:adminLogsModel.data.pages" ng-class="{active:page==$index+1}" ng-show="$index+1 < Number(page)+5 && $index+1 > Number(page)-5">
+                <a ng-click="getLogs({{$index+1}})" class="hand-cursor">{{$index+1}}</a>
+            </li>
+            <li ng-class="{disabled:page==adminUsersModel.data.pages}"><a ng-click="getLogs(Number(page)+1)" class="hand-cursor">&raquo;</a></li>
+        </ul>
+
+    </div>
+</aside>

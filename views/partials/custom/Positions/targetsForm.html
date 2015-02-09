@@ -1,0 +1,26 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-right" ng-show="targetsFor == 'areas'" ng-click="editArea(selectedArea)" >{{getTranslation('Back')}}</button>
+        <button class="btn btn-link pull-right" ng-show="targetsFor == 'ratingConfiguration'" ng-click="editRatingConfiguration(selectedRatingConfiguration)" >{{getTranslation('Back')}}</button>
+    </div>
+
+    <form id="Targets-form" name="Targets-form" role="form">
+        <div class="row" ng-form="TargetsForm">
+            <div class="col-md-12 col-xs-12">
+                <!--<div class="form-group">
+                    <label ng-bind="getTranslation('Status')"></label>
+                    <select name="status" class="form-control" ng-model="selectedTarget.status" ng-options="obj.value as obj.name for obj in statuses"></select>
+                </div>-->
+                <div class="form-group" ng-class="{'has-error':TargetsForm.targetDescription.$invalid}">
+                    <label ng-bind="getTranslation('Target Description')"></label>
+                    <textarea name="targetDescription" class="form-control" ng-model="selectedTarget.targetDescription" ng-required="true" required></textarea>
+                    <span ng-show="TargetsForm.targetDescription.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary pull-right" ng-disabled="TargetsForm.$invalid || TargetsForm.$pristine" ng-click="saveTarget(selectedTarget)" ng-bind="getTranslation('Submit')"></button>
+    </form>
+
+</div>

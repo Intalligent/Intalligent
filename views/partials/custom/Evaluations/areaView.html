@@ -1,0 +1,44 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <a class="btn btn-link pull-left hand-cursor" href="/home/#/employees/{{selectedEmployee._id}}">{{getTranslation('Back to')}} {{selectedEmployee.employeeName}}</a>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <div class="page-header position-relative row">
+                <div class="col-md-12">
+                    <h1>{{selectedArea.areaName}}</h1>
+                </div>
+            </div><!--/page-header-->
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="widget-box">
+                        <div class="widget-header widget-header-flat widget-header-small">
+                            <h5>
+                                {{getTranslation('Area Evolution')}}
+                            </h5>
+
+                        </div>
+
+                        <div class="widget-body">
+                            <div class="widget-main">
+
+                                <div id="area-graph" class="chart"></div>
+
+                            </div><!-- /widget-main -->
+                        </div><!-- /widget-body -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

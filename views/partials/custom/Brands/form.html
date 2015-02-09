@@ -1,0 +1,91 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link pull-left  hand-cursor" ng-click="cancel()">{{getTranslation("Back to brands list")}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="space-10"></div>
+        <form class="simple-form" role="form" name="Brands_form">
+            <fieldset>
+
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+
+                              <div class="form-group" ng-class="{'has-error':Brands_form.brand.$invalid}">
+                                  <label class="col-sm-3 control-label no-padding-right" for="brand">{{getTranslation("brand")}}</label>
+                                  <input type="text" class="form-control" name="brand" id="brand" placeholder="" ng-model="_Brands.brand" required>
+                                  <span ng-show="Brands_form.brand.$invalid" class="help-inline">{{getTranslation("Field Brand is required")}}</span>
+                              </div>
+
+                              <div class="form-group" ng-class="{'has-error':Brands_form.code.$invalid}">
+                                  <label for="code">{{getTranslation("Brand code")}}</label>
+                                  <input type="text" class="form-control" name="code" id="code" placeholder="" ng-model="_Brands.code" required>
+                                  <span ng-show="Brands_form.code.$invalid" class="help-inline">{{getTranslation("Field code is required")}}</span>
+                              </div>
+
+                              <div class="form-group">
+                                  <input type="checkbox" ng-model="_Brands.showBrandLogo">
+                                  <label ng-bind="getTranslation('Show brand logo')"></label>
+                              </div>
+
+                              <div class="form-group" ng-class="{'has-error':_Brands.showBrandLogo && Brands_form.brandLogo.$invalid}" ng-show="_Brands.showBrandLogo">
+                                  <label ng-bind="getTranslation('Brand logo')"></label>
+
+                                  <div class="input-group">
+                                      <input id="brandLogo" name="brandLogo" type="text" class="form-control" ng-model="_Brands.brandLogo">
+                                      <span class="input-group-btn"><button type="button" class="btn btn-primary btn-sm" ng-click="openGallery('brandLogo')">{{getTranslation('Choose')}}</button></span>
+                                  </div>
+
+                                  <span ng-show="_Brands.showBrandLogo && Brands_form.brandLogo.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+
+                                  <img ng-src="{{_Brands.brandLogo}}" class="image-input-preview"/>
+                              </div>
+
+                              <div class="form-group">
+                                  <input type="checkbox" ng-model="_Brands.loadBrandCSS">
+                                  <label ng-bind="getTranslation('Load brand CSS')"></label>
+                              </div>
+
+                              <div class="form-group" ng-class="{'has-error':_Brands.loadBrandCSS && Brands_form.brandCSS.$invalid}" ng-show="_Brands.loadBrandCSS">
+                                  <label ng-bind="getTranslation('Brand CSS')"></label>
+                                  <textarea class="form-control" name="brandCSS" id="brandCSS" placeholder="" ng-model="_Brands.brandCSS" ng-required="_Brands.loadBrandCSS" style="min-height: 200px;"></textarea>
+                                  <span ng-show="_Brands.loadBrandCSS && Brands_form.brandCSS.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                              </div>
+
+                              <div class="form-group">
+                                  <input type="checkbox" ng-model="_Brands.loadBrandHomeFile">
+                                  <label ng-bind="getTranslation('Load brand home file')"></label>
+                              </div>
+
+                              <div class="form-group" ng-class="{'has-error':_Brands.loadBrandHomeFile && Brands_form.brandHomeFile.$invalid}" ng-show="_Brands.loadBrandHomeFile">
+                                  <label ng-bind="getTranslation('Brand home file')"></label>
+                                  <input type="text" class="form-control" name="brandHomeFile" id="brandHomeFile" placeholder="" ng-model="_Brands.brandHomeFile" ng-required="_Brands.loadBrandHomeFile">
+                                  <span ng-show="_Brands.loadBrandHomeFile && Brands_form.brandCSS.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                              </div>
+
+
+
+
+                        </div>
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="Brands_form.$invalid  || Brands_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_Brands)">
+                        <i class="fa fa-save"></i>
+                        {{getTranslation("Save")}}
+                    </button>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>      <!-- end edit form -->

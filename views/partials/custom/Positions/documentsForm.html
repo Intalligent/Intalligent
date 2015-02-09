@@ -1,0 +1,22 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-right" ng-show="documentsFor == 'targets'" ng-click="editTarget(selectedTarget)" >{{getTranslation('Back')}}</button>
+        <button class="btn btn-link pull-right" ng-show="documentsFor == 'actionPlan'" ng-click="editActionPlan(selectedActionPlan)" >{{getTranslation('Back')}}</button>
+    </div>
+
+    <form id="Documents-form" name="Documents-form" role="form">
+        <div class="row" ng-form="DocumentsForm">
+            <div class="col-md-12 col-xs-12">
+                <div class="form-group" ng-class="{'has-error':DocumentsForm.documentURL.$invalid}">
+                    <label ng-bind="getTranslation('Document URL')"></label>
+                    <input name="documentURL" type="text" class="form-control required" ng-model="selectedDocument.documentURL" ng-required="true" required>
+                    <span ng-show="DocumentsForm.documentURL.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary pull-right" ng-disabled="DocumentsForm.$invalid || DocumentsForm.$pristine" ng-click="saveDocument(selectedDocument)" ng-bind="getTranslation('Submit')">Submit</button>
+    </form>
+
+</div>

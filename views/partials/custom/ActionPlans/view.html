@@ -1,0 +1,110 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button ng-show="internalLink" class="btn btn-link pull-left hand-cursor" ng-click="viewActionPlans(selectedEmployee._id)" >{{getTranslation('Back to list')}}</button>
+        <a ng-hide="internalLink" class="btn btn-link pull-left hand-cursor" href="/home/#/employees/{{selectedEmployee._id}}" >{{getTranslation('Back to')}} {{selectedEmployee.employeeName}}</a>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="widget-body">
+                    <div class="widget-main">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label ng-bind="getTranslation('Status')"></label>
+                                    <small>
+                                        <span ng-show="selectedActionPlan.status == 1" class="badge badge-danger" ng-bind="getTranslation('Not initialized')"></span>
+                                        <span ng-show="selectedActionPlan.status == 2" class="badge" ng-bind="getTranslation('In progress')"></span>
+                                        <span ng-show="selectedActionPlan.status == 3" class="badge badge-success" ng-bind="getTranslation('Completed')"></span>
+                                    </small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{getTranslation("Action Plan Description")}}</label>
+                                    <p class="action-plan-description" ng-bind="selectedActionPlan.actionPlanDescription"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.actionPlanInstructions && selectedActionPlan.actionPlanInstructions != ''">
+                                    <label>{{getTranslation("Action Plan Instructions")}}</label>
+                                    <p class="action-plan-description" ng-bind="selectedActionPlan.actionPlanInstructions"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.observations && selectedActionPlan.observations != ''">
+                                    <label>{{getTranslation("Observations")}}</label>
+                                    <p class="action-plan-description" ng-bind="selectedActionPlan.observations"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.link && selectedActionPlan.link != ''">
+                                    <label>{{getTranslation("Link")}}</label>
+                                    <p><a class="action-plan-link"href="{{selectedActionPlan.link}}" target="_blank" style="font-size: 12px;">{{selectedActionPlan.link}}</a></p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="form-group">
+                                    <label ng-bind="getTranslation('Trainers')"></label>
+                                    <ul>
+                                        <li ng-repeat="trainer in selectedActionPlan.trainers" ng-bind="trainer"></li>
+                                    </ul>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.actionCategoryName">
+                                    <label>{{getTranslation("Action Plan Category")}}</label>
+                                    <p ng-bind="selectedActionPlan.actionCategoryName"></p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{getTranslation("Percent Completed")}}</label>
+                                    <div class="progress" data-percent="{{selectedActionPlan.percentCompleted}}%" style="margin: 10px 0px 0px 0px;">
+                                        <div class="progress-bar" style="width:{{selectedActionPlan.percentCompleted}}%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.estimatedStartDate">
+                                    <label>{{getTranslation("Estimated Start Date")}}</label>
+                                    <p ng-bind="selectedActionPlan.estimatedStartDate  | date:'medium'"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.estimatedEndDate">
+                                    <label>{{getTranslation("Estimated End Date")}}</label>
+                                    <p ng-bind="selectedActionPlan.estimatedEndDate  | date:'medium'"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.startDate">
+                                    <label>{{getTranslation("Start Date")}}</label>
+                                    <p ng-bind="selectedActionPlan.startDate  | date:'medium'"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.endDate">
+                                    <label>{{getTranslation("End Date")}}</label>
+                                    <p ng-bind="selectedActionPlan.endDate  | date:'medium'"></p>
+                                </div>
+
+                                <div class="form-group" ng-show="selectedActionPlan.revisionDate">
+                                    <label>{{getTranslation("Revision Date")}}</label>
+                                    <p ng-bind="selectedActionPlan.revisionDate  | date:'medium'"></p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div><!-- /widget-main -->
+                </div><!-- /widget-body -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

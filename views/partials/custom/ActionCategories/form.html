@@ -1,0 +1,46 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="space-10"></div>
+        <form class="simple-form" role="form" name="ActionCategories_form">
+            <fieldset>
+
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+    <div class="form-group" ng-class="{'has-error':ActionCategories_form.actionCategory.$invalid}"> 
+        <label for="actionCategory">{{getTranslation("Action category name")}}</label>
+        <input type="text" class="form-control" name="actionCategory" id="actionCategory" placeholder="" ng-model="_ActionCategories.actionCategory" required>
+        <span ng-show="ActionCategories_form.actionCategory.$invalid" class="help-inline">{{getTranslation("Field Action Category is required")}}</span>
+   </div>
+                              <div class="form-group" ng-class="{'has-error':ActionCategories_form.code.$invalid}">
+                                  <label for="code">{{getTranslation("Action Category code")}}</label>
+                                  <input type="text" class="form-control" name="code" id="code" placeholder="" ng-model="_ActionCategories.code" required>
+                                  <span ng-show="ActionCategories_form.code.$invalid" class="help-inline">{{getTranslation("Field code is required")}}</span>
+                              </div>
+</div> 
+
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="ActionCategories_form.$invalid  || ActionCategories_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_ActionCategories)">
+                        <i class="fa fa-save"></i>
+                        {{getTranslation("Save")}}
+                    </button>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>      <!-- end edit form -->

@@ -1,0 +1,51 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left  hand-cursor" ng-click="editSelectedRatingTemplate(selectedRatingTemplate)" >{{getTranslation('Back to')}} &nbsp; <strong style="color:black">{{selectedRatingTemplate.ratingTemplateName}}</strong></button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <form id="Ratings-form" name="Ratings-form" role="form">
+                <div class="row" ng-form="RatingsForm">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group" ng-class="{'has-error':RatingsForm.ratingDescription.$invalid}">
+                            <label ng-bind="getTranslation('Rating Description')"></label>
+                            <input type="text" name="ratingDescription" class="form-control" ng-model="selectedRating.ratingDescription" ng-required="true" required></textarea>
+                            <span ng-show="RatingsForm.ratingDescription.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':RatingsForm.ratingValue.$invalid}">
+                            <label ng-bind="getTranslation('Rating Value')"></label>
+                            <input name="ratingValue" type="text" class="form-control required" ng-model="selectedRating.ratingValue" ng-required="true" required>
+                            <span ng-show="RatingsForm.ratingValue.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Rating Color')"></label>
+                            <!--<input name="ratingColor" type="text" class="form-control" ng-model="selectedRating.ratingColor">-->
+
+                            <!--<input id="colorpicker1" type="text" class="input-small">-->
+
+                            <input colorpicker type="text" class="form-control" ng-model="selectedRating.ratingColor" />
+                        </div>
+
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Rating Image')"></label>
+
+                            <div class="input-group">
+                                <input id="ratingImage" name="ratingImage" type="text" class="form-control" ng-model="selectedRating.ratingImage">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary btn-sm" ng-click="openGallery('ratingImage')">{{getTranslation('Choose')}}</button></span>
+                            </div>
+
+                            <img ng-src="{{selectedRating.ratingImage}}" class="image-input-preview"/>
+                        </div>
+
+                    </div>
+                </div>
+                <button class="btn btn-primary pull-right" ng-disabled="RatingsForm.$invalid || RatingsForm.$pristine" ng-click="saveRating(selectedRating)" ng-bind="getTranslation('Save')"></button>
+            </form>
+
+        </div>
+    </div>
+</div>

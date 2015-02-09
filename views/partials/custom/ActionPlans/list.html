@@ -1,0 +1,108 @@
+<section class="content">
+
+    <div class="row" style="height: 30px;">
+        <a ng-show="from == 'employee'" class="btn btn-link pull-left hand-cursor" href="/home/#/employees/{{selectedEmployee._id}}">{{getTranslation('Back to')}} {{selectedEmployee.employeeName}}</a>
+        <a ng-show="from == 'profile'" class="btn btn-link pull-left hand-cursor" href="/home/#/my-employee-profile">{{getTranslation('Back to my profile')}}</a>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <div class="page-header position-relative row">
+                <div class="col-md-6">
+                    <h1>{{getTranslation('Action Plans for')}} {{selectedEmployee.employeeName}}</h1>
+                </div>
+                <div class="col-md-6" style="text-align: right;" ng-show="canManage">
+                    <button class="btn btn-xs btn-info hand-cursor" ng-click="addActionPlan()" ng-bind="getTranslation('Add')"></button>
+                </div>
+            </div><!--/page-header-->
+
+            <div class="row">
+
+                <div class="widget-body">
+
+                    <div class="widget-header widget-header-flat widget-header-small">
+                        <div class="pull-right">
+                            <div class="input select">
+                                <select name="action-plans-order" id="action-plans-order" ng-model="orderBySelect" ng-change="viewActionPlans(selectedEmployee._id, orderBySelect)">
+                                    <option value="sourceID" ng-selected="orderBy == 'sourceID'">{{getTranslation('Area')}}</option>
+                                    <option value="startDate" ng-selected="orderBy == 'startDate'">{{getTranslation('Start Date')}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <label ng-bind="getTranslation('Order By:')" style="margin: 5px 10px 0px 0px;"></label>
+                        </div>
+                    </div>
+
+                    <div class="widget-main">
+
+                        <div id="task-tab" class="tab-pane active">
+
+                           <ul class="item-list">
+
+                               <p class="text-danger" ng-bind="getTranslation('Sorry, there are no action plans!')" ng-hide="actionPlans" >
+
+                               </p>
+
+                                <li class="item-orange clearfix" ng-repeat="actionPlan in actionPlans" id="{{actionPlan._id}}">
+
+                                    <div class="row">
+
+                                        <div class="col-md-8 hand-cursor" ng-click="viewActionPlan(actionPlan._id)">
+                                            <p class="lbl">
+                                                {{actionPlan.actionPlanDescription}}
+                                                <small>
+                                                    <span ng-show="actionPlan.status == 1" class="badge badge-danger" ng-bind="getTranslation('Not initialized')"></span>
+                                                    <span ng-show="actionPlan.status == 2" class="badge" ng-bind="getTranslation('In progress')"></span>
+                                                    <span ng-show="actionPlan.status == 3" class="badge badge-success" ng-bind="getTranslation('Completed')"></span>
+                                                </small>
+                                                <span class="badge badge-inverse" ng-show="actionPlan.actionCategory" ng-bind="actionPlan.actionCategoryName"></span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="pull-right" ng-show="canManage">
+                                                <button class="btn btn-xs btn-inverse hand-cursor" ng-click="editActionPlan(actionPlan._id)" ng-bind="getTranslation('Edit')"></button>
+
+                                                <button class="btn btn-xs btn-danger hand-cursor" ng-click="deleteActionPlan(actionPlan._id)" ng-bind="getTranslation('Delete')"></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row hand-cursor" ng-click="viewActionPlan(actionPlan._id)" ng-show="actionPlan.actionPlanInstructions && actionPlan.actionPlanInstructions != ''">
+                                        <div class="col-md-12">
+                                            <p class="lbl" ng-bind="actionPlan.actionPlanInstructions" style="float: none;"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row hand-cursor" ng-click="viewActionPlan(actionPlan._id)">
+                                        <div class="col-md-12">
+                                            <p class="lbl evaluation-history-date" ng-bind="actionPlan.startDate  | date:'medium'" style="float: none;"></p>
+                                            <p ng-show="actionPlan.link && actionPlan.link != ''"><a class="action-plan-link" href="{{actionPlan.link}}" target="_blank">{{actionPlan.link}}</a></p>
+
+                                            <div class="progress progress-mini" style="margin: 10px 0px 0px 0px;">
+                                                <div class="progress-bar progress-danger" style="width: {{actionPlan.percentCompleted}}%;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div><!-- /widget-main -->
+                </div><!-- /widget-body -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div ng-include src="deleteModal"></div>

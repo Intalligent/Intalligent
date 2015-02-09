@@ -1,0 +1,72 @@
+<aside class="left-side sidebar-offcanvas">
+
+    <section class="sidebar">
+        <h3>
+            <span ng-bind="getTranslation('Settings')"></span>
+        </h3>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="/home/#/position-categories" ng-bind="getTranslation('Position Categories')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/position-areas" ng-bind="getTranslation('Position Areas')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/proffesional-groups" ng-bind="getTranslation('Proffesional Groups')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/departments" ng-bind="getTranslation('Departments')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/brands" ng-bind="getTranslation('Brands')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/units" ng-bind="getTranslation('Units')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/competencies" ng-bind="getTranslation('Competencies')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/action-categories" ng-bind="getTranslation('Action Plans Categories')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/rating-templates" ng-bind="getTranslation('Rating Templates')"></a>
+            </li>
+
+            <li class="treeview active">
+                <a class="dropdown-toggle" ng-click="toggleElement('messages-submenu')">
+                    {{getTranslation('Evaluations')}}
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <ul id="messages-submenu" class="treeview-menu">
+                    <li>
+                        <a href="/home/#/appraisal_storage" style="margin-left: 10px;">{{getTranslation('Appraisal Storage')}}</a>
+                    </li>
+
+                    <li>
+                        <a href="/home/#/auto_appraisal_storage" style="margin-left: 10px;">{{getTranslation('Auto Appraisal Storage')}}</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="/home/#/loader/settings" ng-bind="getTranslation('Employee Import')"></a>
+            </li>
+
+            <li>
+                <a href="/home/#/settings/change-user" ng-bind="getTranslation('Change User')"></a>
+            </li>
+
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

@@ -1,0 +1,32 @@
+<aside class="right-side full-page" ng-init="initEmployees()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home" ng-bind="getTranslation('Home')"></a>
+            </li>
+
+            <li>
+                <a class="hand-cursor" ng-click="getEmployees()" ng-bind="getTranslation('Employees')"></a>
+            </li>
+
+        </ul><!-- .breadcrumb -->
+        <div class="nav-search" id="nav-search" ng-show="!selectedEmployee">
+
+            <form class="form-search" ng-submit="getEmployees(1, EmployeesModel.data.search)">
+                <span class="input-icon">
+                    <input type="text" placeholder="{{getTranslation('Search ...')}}" class="nav-search-input" autocomplete="off" ng-model="EmployeesModel.data.search">
+                    <button type="button" class="btn btn-xs btn-info btn-search" data-toggle="button" ng-click="getEmployees(1, EmployeesModel.data.search)">{{getTranslation('Search')}}</button>
+                    <a ng-click="toggleFilters()" class="hand-cursor" style="font-size: 10px;">{{getTranslation('advanced')}}</a>
+                </span>
+            </form>
+        </div>
+
+    </div>
+
+    <div ng-include src="subPage"></div>
+
+</aside>
+
+<div ng-include src="deleteEmployeesModal"></div>

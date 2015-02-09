@@ -1,0 +1,98 @@
+<div class="panel panel-info" >
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+                        <span class="badge badge-info  hand-cursor" tooltip="{{getTranslation('Click here to get more info about the rating configuration')}}">
+                        ?
+                        </span>
+        {{getTranslation('Rating Configuration (Items)')}}
+
+
+
+        <a class="hand-cursor pull-right" ng-click="addRatingConfiguration()">{{getTranslation('Add new')}}</a>
+
+        <div class="dropdown pull-right" style="margin-right: 20px;">
+             <a data-toggle="dropdown" class="dropdown-toggle" href="/#">
+                 {{getTranslation('Add from Rating Template')}} &nbsp;
+                 <i class="fa fa-caret-down bigger-110 width-auto"></i>
+             </a>
+
+             <ul class="dropdown-menu dropdown-info">
+                 <li ng-repeat="ratingTemplate in ratingTemplates">
+                     <a data-toggle="tab" class="hand-cursor" ng-click="addRatings(ratingTemplate.ratings)">{{ratingTemplate.ratingTemplateName}}</a>
+                 </li>
+             </ul>
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+
+        <div class="alert alert-warning" ng-hide="selectedBehaviour.ratingConfiguration">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times bigger-125"></i>
+            </button>
+            <i class="fa  fa-warning bigger-300" style="color:black"></i> &nbsp; &nbsp;
+            <div>
+            <strong>{{getTranslation('OOPPS! seems that you don´t have any rating item defined yet... ')}} </strong>
+            <br>
+            <div class="text-primary"><i>{{getTranslation('...Or maybe you need more information about ratings, items and so on?')}}</i></div>
+            </div>
+            <br>
+
+            <div class="row">
+                <a class="btn btn-default hand-cursor radius-6 " href="#">{{getTranslation('Get more info about ratings')}}</a>
+                <button class="btn btn-success radius-4 hand-cursor " ng-click="addRatingConfiguration()">{{getTranslation('Add a new rating item')}}</button>
+            </div>
+        </div>
+
+        <table class="table">
+
+
+            <tbody ui-sortable="sortableOptions" ng-model="selectedBehaviour.ratingConfiguration">
+            <tr class="table-row" ng-repeat="ratingConfiguration in selectedBehaviour.ratingConfiguration">
+                <td style="width: 15px;" ><i class="sortable-handle fa fa-bars" tooltip="{{getTranslation('Drag and drop the rating item to reorder')}}"></i></td>
+                <td class="visible-md visible-lg hidden-sm hidden-xs" style="width: 100px;">
+                    <div class="btn-group">
+                        <button class="btn btn-xs btn-link hand-cursor" ng-click="editRatingConfiguration(ratingConfiguration)" tooltip="{{getTranslation('Click here to modify this rating item')}}">
+                            <i class="fa fa-edit bigger-140" style="color:black"></i>
+                        </button>
+                        <button class="btn btn-xs btn-link hand-cursor" ng-click="deletePositionItem('ratingConfigurations', ratingConfiguration)" tooltip="{{getTranslation('Click here to permanently delete this action')}}">
+                            <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                        </button>
+                    </div>
+                </td>
+                <td  class="visible-xs visible-sm hidden-md hidden-lg" style="width: 1px;">  <!-- buttons for mobile -->
+                    <div>
+                        <div class="inline position-relative">
+                            <button class="btn btn-minier btn-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-caret-square-o-down bigger-140" style="color:black"></i>
+                            </button>
+
+                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                <li>
+                                    <button class="btn btn-xs btn-link hand-cursor" ng-click="editRatingConfiguration(ratingConfiguration)" tooltip="{{getTranslation('Click here to modify this rating item')}}">
+                                        <i class="fa fa-edit bigger-140" style="color:black"></i>
+                                    </button>
+                                </li>
+
+                                <li>
+                                    <button class="btn btn-xs btn-link hand-cursor" ng-click="deletePositionItem('ratingConfigurations', ratingConfiguration)" tooltip="{{getTranslation('Click here to permanently delete this action')}}">
+                                        <i class="fa fa-trash-o bigger-140" style="color:red"></i>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+
+                <td class="hand-cursor" ng-click="editRatingConfiguration(ratingConfiguration)" >
+                    <div class="custom-badge" style="background-color: {{ratingConfiguration.ratingColor}};" tooltip="{{getTranslation('This is the value that will be stored when this option is selected')}}">
+                        {{ratingConfiguration.ratingValue}}
+                    </div>
+                    &nbsp; &nbsp; {{ratingConfiguration.ratingDescription}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<script type="text/javascript">
+    $('#profile-form').validate({
+        rules: {
+            username: {
+                required: true
+            },
+            password: {
+                minlength: 4
+            },
+            confirmation: {
+                minlength: 4,
+                equalTo: '#password'
+            },
+            language: {
+                required: true
+            }
+        },
+        messages: {
+            username: "Please enter a username",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 4 characters long"
+            },
+            confirmation: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 4 characters long",
+                equalTo: "Please enter the same password as above"
+            },
+            language: "Please enter a language"
+        }
+    });
+</script>
+
+<div class="main-content-full" ng-init="getProfile()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home" ng-bind="getTranslation('Home')"></a>
+            </li>
+            <li class="active" ng-bind="getTranslation('Profile')"></li>
+        </ul><!-- .breadcrumb -->
+
+    </div>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1 ng-bind="getTranslation('My Account')"></h1>
+        </div><!-- /.page-header -->
+
+        <form novalidate id="profile-form" name="profile-form" role="form" ng-submit="editProfile(usersModel.data)">
+            <div class="form-group">
+                <label ng-bind="getTranslation('Email')"></label>
+                <p ng-bind="usersModel.data.email"></p>
+            </div>
+            <div class="form-group">
+                <label ng-bind="getTranslation('Username')"></label>
+                <p ng-bind="usersModel.data.username"></p>
+            </div>
+            <div class="form-group">
+                <label ng-bind="getTranslation('Password')"></label>
+                <input id="password" name="password" type="password" class="form-control" ng-model="usersModel.data.password">
+            </div>
+            <div class="form-group">
+                <label ng-bind="getTranslation('Confirmation')"></label>
+                <input name="confirmation" type="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label ng-bind="getTranslation('Language')"></label>
+                <select name="language" class="form-control" ng-model="usersModel.data.language" ng-options="obj.language as obj.description for obj in languages"></select>
+            </div>
+            <div class="form-group">
+                <label ng-bind="getTranslation('Roles')"></label>
+                <ul>
+                    <li ng-repeat="role in usersModel.data.roles">{{role.name}}</li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label ng-bind="getTranslation('Filters')"></label>
+                <ul>
+                    <li ng-repeat="filter in usersModel.data.filters">{{filter.name}}: <b>{{filter.value}}</b></li>
+                </ul>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn" ng-bind="getTranslation('Submit')"></button>
+        </form>
+
+    </div>
+
+</div>

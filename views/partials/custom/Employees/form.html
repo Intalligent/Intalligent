@@ -1,0 +1,206 @@
+<div ng-include src="resetModal"></div>
+
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button ng-show="mode == 'insert'" class="btn btn-link pull-left  hand-cursor" ng-click="getEmployees()" >{{getTranslation('Back to employees list')}}</button>
+        <button ng-show="mode == 'update'" class="btn btn-link pull-left  hand-cursor" ng-click="viewEmployee(selectedEmployee._id, selectedEmployee)" >{{getTranslation('Back to')}} {{selectedEmployee.employeeName}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+    <form id="Employees-form" name="Employees-form" role="form">
+        <div class="row" ng-form="EmployeesForm">
+
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="/#home" data-toggle="tab">{{getTranslation('Employee')}}</a></li>
+                <li class=""><a href="/#advanced" data-toggle="tab" ng-show="restrictRole(['52988ac5df1fcbc201000008', '5327d7ef9c3b0f7801acda0d'])">{{getTranslation('Advanced')}}</a></li>
+                <li class=""><a href="/#user-data" data-toggle="tab" ng-show="restrictRole(['52988ac5df1fcbc201000008', '5327d7ef9c3b0f7801acda0d']) && mode == 'update'">{{getTranslation('User Data')}}</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="home">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group" ng-class="{'has-error':EmployeesForm.status.$invalid}">
+                                <label ng-bind="getTranslation('Status')"></label>
+                                <select name="status" class="form-control" ng-model="selectedEmployee.status" ng-options="obj.value as obj.name for obj in statuses" ng-required="true" required></select>
+                                <span ng-show="EmployeesForm.status.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error':EmployeesForm.employeeCode.$invalid}">
+                                <label ng-bind="getTranslation('Employee Code')"></label>
+                                <input name="employeeCode" type="text" class="form-control required" ng-model="selectedEmployee.employeeCode" ng-required="true" required>
+                                <span ng-show="EmployeesForm.employeeCode.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error':EmployeesForm.employeeName.$invalid}">
+                                <label ng-bind="getTranslation('Employee Name')"></label>
+                                <input name="employeeName" type="text" class="form-control required" ng-model="selectedEmployee.employeeName" ng-required="true" required>
+                                <span ng-show="EmployeesForm.employeeName.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Employee Image')"></label>
+                                <div class="input-group">
+                                    <input id="employeeImage" type="text" class="form-control" ng-model="selectedEmployee.employeeImage">
+                                    <span class="input-group-btn"><button type="button" class="btn btn-primary btn-sm" ng-click="openGallery('employeeImage')">Choose</button></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Actual Unit')"></label>
+                                <select name="idunit" class="form-control" ng-model="selectedEmployee.idunit" ng-options="obj.unit as obj.unit for obj in units"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Actual Position')"></label>
+                                <select name="actualPosition" class="form-control" ng-model="selectedEmployee.actualPosition" ng-options="obj._id as obj.positionName for obj in positions"></select>
+                            </div>
+                            <!--<div class="form-group">
+                                <label ng-bind="getTranslation('Payroll Position')"></label>
+                                <input name="payrollPosition" type="text" class="form-control" ng-model="selectedEmployee.payrollPosition">
+                            </div>-->
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Actual Department')"></label>
+                                <select name="actualDepartment" class="form-control" ng-model="selectedEmployee.actualDepartment" ng-options="obj._id as obj.department for obj in departments"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group" ng-class="{'has-error':EmployeesForm.sex.$invalid}">
+                                <label ng-bind="getTranslation('Gender')"></label>
+                                <select name="sex" class="form-control" ng-model="selectedEmployee.sex" ng-options="obj.value as obj.name for obj in sex" ng-required="true" required></select>
+                                <span ng-show="EmployeesForm.sex.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Education Level')"></label>
+                                <input name="educationLevel" type="text" class="form-control" ng-model="selectedEmployee.educationLevel"
+                                       typeahead="educationLevel as educationLevel for educationLevel in educationLevels | filter:$viewValue | limitTo:8">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Civil Status')"></label>
+                                <input name="civilStatus" type="text" class="form-control" ng-model="selectedEmployee.civilStatus"
+                                       typeahead="civilStatus as civilStatus for civilStatus in civilStatuses | filter:$viewValue | limitTo:8">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Nationality')"></label>
+                                <input name="nationality" type="text" class="form-control" ng-model="selectedEmployee.nationality"
+                                       typeahead="nationality as nationality for nationality in nationalities | filter:$viewValue | limitTo:8">
+                            </div>
+
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Phone')"></label>
+                                <input name="phone" type="text" class="form-control" ng-model="selectedEmployee.phone">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Mobile Phone')"></label>
+                                <input name="mobilePhone" type="text" class="form-control" ng-model="selectedEmployee.mobilePhone">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Email Address')"></label>
+                                <input name="emailAddress" type="text" class="form-control" ng-model="selectedEmployee.emailAddress">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="advanced">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="selectedEmployee.blockForLoad">
+                                <label ng-bind="getTranslation('Block for load')"></label>
+                            </div>
+
+                            <div class="form-group" ng-show="mode == 'update'">
+                                <button class="btn btn-warning" ng-click="resetEmployee(selectedEmployee._id)" ng-bind="getTranslation('Reset Evaluations Data')"></button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="user-data">
+                    <div class="row" ng-show="(selectedUser)">
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Status')"></label>
+                                <select name="status" class="form-control" ng-model="selectedUser.status" ng-options="obj.value as obj.name for obj in userStatuses" ng-disabled="true"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Username')"></label>
+                                <input name="username" type="text" class="form-control" ng-model="selectedUser.username" ng-disabled="true">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Email')"></label>
+                                <input name="email" type="email" class="form-control" ng-model="selectedUser.email" ng-disabled="true">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Password')"></label>
+                                <input name="password" type="password" class="form-control" ng-model="selectedUser.password">
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('Repeat Password')"></label>
+                                <input name="password-confirmation" type="password" class="form-control" ng-model="selectedUser.passwordConfirmation">
+                            </div>
+
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('User Brand')"></label>
+                                <select multiple="multiple" ng-init="initChosen('userBrand')" id="userBrand" name="userBrand" class="form-control chosen-select" ng-model="selectedUser.filters.brands"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('User Unit')"></label>
+                                <select multiple ng-init="initChosen('userUnit')" id="userUnit" name="userUnit" class="form-control chosen-select" ng-model="selectedUser.filters.units"></select>
+                            </div>
+                            <div class="form-group">
+                                <label ng-bind="getTranslation('User Department')"></label>
+                                <select multiple ng-init="initChosen('userDepartment')" id="userDepartment" name="userDepartment" class="form-control chosen-select" ng-model="selectedUser.filters.departments"></select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" ng-hide="(selectedUser)" style="text-align: center;">
+
+                        <div class="col-md-12 col-xs-12">
+                            <p ng-bind="getTranslation('There is no user associated with the selected employee')"></p>
+
+                            <a ng-click="createNewUser()" class="btn btn-success" ng-bind="getTranslation('Click here to create a new user for this employee')"></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <button class="btn btn-primary pull-right" ng-click="saveEmployee(selectedEmployee, selectedUser)" ng-bind="getTranslation('Save')"></button>
+    </form>
+        </div>
+    </div>
+
+</div>
+
+
+<table class="hidden">
+    <tbody id="filter-row-template">
+    <tr class="table-row filter-row">
+        <td class="filter-name list-filter" style="width: 20%;">
+            <select class="list-filter" ng-model="selectedUser.filters">
+
+            </select>
+            <input class="filter-name manually-filter" style="display: none; height: 30px;"/>
+            <br />
+            <a class="list-filter enter-manually-btn hand-cursor" style="font-size: 10px;">Enter manually</a>
+            <a class="manually-filter choose-from-list-btn hand-cursor" style="display: none; font-size: 10px;">Choose from list</a>
+        </td>
+        <td class="filter-value">
+            <input class="filter-value" style="width: 100%; height: 30px;"/>
+        </td>
+        <td>
+            <a class="hand-cursor btn btn-xs btn-danger filter-delete">
+                <i class="fa fa-trash-o bigger-120"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>

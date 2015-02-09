@@ -1,0 +1,122 @@
+.max-two-lines {
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 2em;
+    line-height: 1em;
+}
+
+.max-one-line {
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 2em;
+    line-height: 1em;
+}
+
+.hand-cursor {
+    cursor: hand;
+    cursor: pointer;
+}
+
+.main-content-full {
+     margin-left: 0px;
+}
+
+.navbar-main {
+    width: 50%;
+}
+
+@media only screen and (max-width: 460px) {
+    .navbar-main {
+        width: 100%;
+    }
+}
+
+.badgeImportant {
+    background-color: rgb(209, 91, 71) !important;
+}
+
+.unviewedNotification {
+    background-color: gainsboro !important;
+}
+
+.accept-notification {
+    height: 25px;
+    padding: 0px;
+    font-size: 12px;
+    float: right;
+}
+
+.dz-message {
+    cursor: hand;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.dz-item {
+    float: left;
+}
+.dz-label {
+    position: absolute;
+}
+.dz-loading {
+    width: 47px !important;
+    height: 47px !important;
+    position: absolute;
+    z-index: 9999999;
+    left: 51.5px;
+    top: 51.5px;
+}
+
+.hidden {
+    display: none
+}
+
+.center {
+    text-align: center;
+}
+
+.dl-file-horizontal dt {
+    float: left;
+    width: 60px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dl-file-horizontal dd {
+    margin-left: 80px;
+}
+
+.configuration-field {
+    min-width: 300px;
+}
+
+.user-menu > li > a > i{
+    width: 15px;
+    text-align: center;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.configuration-checkbox {
+    display: inline !important;
+    min-width: 20px !important;
+}
+
+.btn-search {
+    margin-top: -4px;
+}
+
+.ui-jqgrid  {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.full-page {
+    margin-left: 0px !important;
+}

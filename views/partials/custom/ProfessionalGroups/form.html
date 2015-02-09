@@ -1,0 +1,42 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="row">
+        <form class="simple-form" role="form" name="ProfessionalGroups_form">
+            <fieldset>
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+
+                                <div class="form-group" ng-class="{'has-error':ProfessionalGroups_form.professionalGroup.$invalid}">
+                                    <label for="professionalGroup">{{getTranslation("professionalGroup")}}</label>
+                                    <input type="text" class="form-control" name="professionalGroup" id="professionalGroup" placeholder="" ng-model="_ProfessionalGroups.professionalGroup" required>
+                                    <span ng-show="ProfessionalGroups_form.professionalGroup.$invalid" class="help-inline">{{getTranslation("Field Professional Group is required")}}</span>
+                               </div>
+
+                               <div class="form-group" ng-class="{'has-error':ProfessionalGroups_form.code.$invalid}">
+                                   <label for="code">{{getTranslation("Code")}}</label>
+                                   <input type="text" class="form-control" name="code" id="code" placeholder="" ng-model="_ProfessionalGroups.code" required>
+                                   <span ng-show="ProfessionalGroups_form.code.$invalid" class="help-inline">{{getTranslation("Field code is required")}}</span>
+                               </div>
+
+                          </div>
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="ProfessionalGroups_form.$invalid  || ProfessionalGroups_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_ProfessionalGroups)">{{getTranslation("Save")}}</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>      <!-- end edit form -->

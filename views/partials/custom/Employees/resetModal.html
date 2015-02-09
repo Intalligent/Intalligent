@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" ng-bind="getTranslation('Confirm Reset')"></h4>
+            </div>
+            <div class="modal-body">
+                <p ng-bind="getTranslation('Are you sure that you want to permanently reset all the data associated with this employee evaluations?')"></p>
+                <input type="checkbox" ng-model="resetConfirmation">
+                <label ng-bind="getTranslation('Confirm reset')"></label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-bind="getTranslation('Cancel')"></button>
+                <a ng-click="confirmReset()" ng-disabled="!resetConfirmation" class="btn btn-primary" ng-bind="getTranslation('Reset')"></a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

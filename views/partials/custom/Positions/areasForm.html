@@ -1,0 +1,49 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left  hand-cursor" ng-click="editSelectedPosition(selectedPosition)" >{{getTranslation('Back to')}} <strong style="color:black">{{selectedPosition.positionName}}</strong></button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <form novalidate id="Areas-form" name="Areas-form" role="form">
+                <div class="row" ng-form="AreasForm">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group" ng-class="{'has-error':AreasForm.areaName.$invalid}">
+                            <label ng-bind="getTranslation('Area Name')"></label>
+                            <input name="areaName" type="text" class="form-control required" ng-model="selectedArea.areaName" ng-required="true" required>
+                            <span ng-show="AreasForm.areaName.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                        </div>
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Area Description')"></label>
+                            <textarea name="selectedArea" class="form-control" ng-model="selectedArea.areaDescription"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="form-group">
+                            <label ng-bind="getTranslation('Area Code')"></label>
+                            <input name="areaCode" type="text" class="form-control" ng-model="selectedArea.areaCode">
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':AreasForm.areaColor.$invalid}">
+                            <label ng-bind="getTranslation('Area Color')"></label>
+                            <input colorpicker name="areaColor" type="text" class="form-control" ng-model="selectedArea.areaColor" ng-required="true" required/>
+                            <span ng-show="AreasForm.areaColor.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" ng-model="selectedArea.areaWeightActive">
+                            <label ng-bind="getTranslation('Area Weight Active')"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary pull-right" ng-click="saveArea(selectedArea)" ng-bind="getTranslation('Save')"
+                        ng-disabled="AreasForm.$invalid || AreasForm.$pristine"></button>
+            </form>
+        </div>
+    </div>
+
+    <div ng-include src="behavioursList" ng-show="mode == 'update'" ng-init="getBehaviours()"></div>
+    <div ng-include src="actionPlansList" ng-show="mode == 'update'" ng-init="getActionPlans('areas')"></div>
+
+</div>

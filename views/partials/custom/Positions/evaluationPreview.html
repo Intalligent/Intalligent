@@ -1,0 +1,74 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left  hand-cursor" ng-click="getPositions()" >{{getTranslation('Back to positions list')}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+
+        <div class="page-header position-relative" style="text-align: right; margin-right: 10px;">
+            <select name="preview-evaluation" id="preview-evaluation" ng-model="positionFrom" ng-change="updateEvaluation(positionFrom)">
+                <option value="" ng-selected="true">{{getTranslation('Preview Evaluation From')}}</option>
+                <option ng-repeat="previewPosition in positions"  ng-value="previewPosition._id">{{previewPosition.positionName}}</option>
+            </select>
+        </div><!--/page-header-->
+
+        <div class="panel-body">
+
+            <div class="row" ng-repeat="area in areas" style="padding: 0 15px;">
+
+                <h3 class="header smaller lighter green" ng-bind="area.areaName"></h3>
+
+                <div class="col-md-12" ng-repeat="behaviour in area.behaviours">
+
+                    <div class="col-md-12 col-xs-12" >
+                        <div class="col-md-9">
+                            <h6 ng-bind="behaviour.behaviourName"></h6>
+                            <p class="evaluate-description" ng-show="behaviour.showBehaviourDescription" ng-bind="behaviour.behaviourDescription"></p>
+                        </div>
+                        <div class="col-md-3" id="{{behaviour._id}}">
+
+                            <div ng-show="behaviour.ratingViewType == 2">
+                                <div ng-repeat="ratingConfiguration in behaviour.ratingConfiguration" ng-show="behaviour.selectedValue == ratingConfiguration.ratingValue"
+                                     ng-click="changeRatingConfiguration(behaviour)" class="rating-button {{ratingConfiguration._id}}" style="background-color: {{ratingConfiguration.ratingColor}};" ng-init="setBGColor(ratingConfiguration._id, ratingConfiguration.ratingColor)"
+                                     ng-bind="ratingConfiguration.ratingDescription">
+                                </div>
+                            </div>
+
+                            <div ng-show="behaviour.ratingViewType == 3">
+                                <div class="input select">
+                                    <select ng-options="ratingConfiguration.ratingValue as ratingConfiguration.ratingDescription for ratingConfiguration in behaviour.ratingConfiguration"
+                                            ng-change="changeRatingConfiguration(behaviour, behaviour.selectedValue)" ng-model="behaviour.selectedValue" class="evaluation-select"></select>
+                                </div>
+                            </div>
+
+                            <div ng-show="behaviour.ratingViewType == 4">
+                                <div class="radio" ng-repeat="ratingConfiguration in behaviour.ratingConfiguration">
+                                    <label>
+                                        <input name="{{behaviour._id}}" type="radio" class="ace" ng-model="behaviour.selectedValue"
+                                               ng-click="changeRatingConfiguration(behaviour, ratingConfiguration.ratingValue)" ng-value="ratingConfiguration.ratingValue">
+                                        <span class="lbl">{{ratingConfiguration.ratingDescription}}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-xs-12" ng-show="behaviour.allowComments">
+                        <div class="col-md-12 col-xs-12">
+                            <small ng-bind="getTranslation('Comments:')"></small>
+                            <textarea ng-show="behaviour.allowComments" ng-model="behaviour.comments" style="width: 100%; margin-bottom: 10px;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12" style="border-top: 2px #999999 solid; margin-bottom: 5px;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

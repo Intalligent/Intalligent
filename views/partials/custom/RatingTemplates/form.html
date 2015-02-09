@@ -1,0 +1,31 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left  hand-cursor" ng-click="getRatingTemplates()" >{{getTranslation('Back to list')}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <form id="RatingTemplates-form" name="RatingTemplates-form" role="form">
+                <div class="row" ng-form="RatingTemplatesForm">
+
+                    <div class="form-group" ng-class="{'has-error':RatingTemplatesForm.ratingTemplateName.$invalid}">
+                        <label ng-bind="getTranslation('Rating Template Name')"></label>
+                        <input name="ratingTemplateName" type="text" class="form-control required" ng-model="selectedRatingTemplate.ratingTemplateName" ng-required="true" required>
+                        <span ng-show="RatingTemplatesForm.ratingTemplateName.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                    </div>
+                    <div class="form-group">
+                        <label ng-bind="getTranslation('Rating Template Description')"></label>
+                        <input name="ratingTemplateDescription" type="text" class="form-control" ng-model="selectedRatingTemplate.ratingTemplateDescription">
+                    </div>
+
+                </div>
+                    <button class="btn btn-primary pull-right" ng-click="saveRatingTemplate(selectedRatingTemplate)" ng-bind="getTranslation('Save')"
+                            ng-disabled="RatingTemplatesForm.$invalid || RatingTemplatesForm.$pristine"></button>
+            </form>
+        </div>
+    </div>
+
+    <div ng-include src="ratingsList" ng-show="mode == 'update'" ng-init="getRatings()"></div>
+
+</div>

@@ -1,0 +1,41 @@
+<div class="page-content">
+
+    <div class="row">
+    <button class="btn btn-link" ng-click="cancel()">{{getTranslation("Back to list")}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="space-10"></div>
+        <form class="simple-form" role="form" name="Departments_form">
+            <fieldset>
+
+
+                <div class="col-sm-12">
+
+                     <div class="col-md-8">
+
+                          <div class="col-sm-12">
+    <div class="form-group" ng-class="{'has-error':Departments_form.department.$invalid}"> 
+        <label for="department">{{getTranslation("department")}}</label> 
+        <input type="text" class="form-control" name="department" id="department" placeholder="" ng-model="_Departments.department" required>
+        <span ng-show="Departments_form.department.$invalid" class="help-inline">{{getTranslation("Field Department is required")}}</span>
+   </div>
+</div> 
+
+
+                     </div>
+
+                </div>
+
+                <div class="col-sm-12" style="padding: 5px;">
+                    <button ng-disabled="Departments_form.$invalid  || Departments_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="save(_Departments)">
+                        <i class="fa fa-save"></i>
+                        {{getTranslation("Save")}}
+                    </button>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>      <!-- end edit form -->

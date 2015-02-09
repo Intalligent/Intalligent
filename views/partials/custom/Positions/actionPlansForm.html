@@ -1,0 +1,49 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-right" ng-show="actionPlansFor == 'areas'" ng-click="editArea(selectedArea)" >{{getTranslation('Back')}}</button>
+        <button class="btn btn-link pull-right" ng-show="actionPlansFor == 'ratingConfiguration'" ng-click="editRatingConfiguration(selectedRatingConfiguration)" >{{getTranslation('Back')}}</button>
+    </div>
+
+    <form id="ActionPlans-form" name="ActionPlans-form" role="form">
+        <div class="row" ng-form="ActionPlansForm">
+            <div ng-class="{'col-md-12 col-xs-12':actionPlansFor == 'ratingConfiguration', 'col-md-6 col-xs-12':actionPlansFor == 'areas'}">
+                <!--<div class="form-group">
+                    <label ng-bind="getTranslation('Status')"></label>
+                    <select name="status" class="form-control" ng-model="selectedActionPlan.status" ng-options="obj.value as obj.name for obj in statuses"></select>
+                </div>-->
+                <div class="form-group" ng-class="{'has-error':ActionPlansForm.actionPlanDescription.$invalid}">
+                    <label ng-bind="getTranslation('Action Plan Description')"></label>
+                    <textarea name="actionPlanDescription" class="form-control" ng-model="selectedActionPlan.actionPlanDescription" ng-required="true" required></textarea>
+                    <span ng-show="ActionPlansForm.actionPlanDescription.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+                <div class="form-group">
+                    <label ng-bind="getTranslation('Action Plan Instructions')"></label>
+                    <textarea name="actionPlanInstructions" class="form-control" ng-model="selectedActionPlan.actionPlanInstructions"></textarea>
+                </div>
+                <div class="form-group">
+                    <label ng-bind="getTranslation('Action Plan Category')"></label>
+                    <select name="actionCategory" class="form-control" ng-model="selectedActionPlan.actionCategory" ng-options="obj._id as obj.actionCategory for obj in actionCategories"></select>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12" ng-if="actionPlansFor == 'areas'">
+                <div class="form-group" ng-class="{'has-error':ActionPlansForm.valueFrom.$invalid}">
+                    <label ng-bind="getTranslation('Value From')"></label>
+                    <slider ng-model="selectedActionPlan.valueFrom" floor="0" ceiling="100" step="1"></slider>
+                    <!--<input name="valueFrom" type="text" class="form-control required" ng-model="selectedActionPlan.valueFrom" ng-required="true" required>-->
+                    <span ng-show="ActionPlansForm.valueFrom.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+                <div class="form-group" ng-class="{'has-error':ActionPlansForm.valueTo.$invalid}">
+                    <label ng-bind="getTranslation('Value To')"></label>
+                    <slider ng-model="selectedActionPlan.valueTo" floor="0" ceiling="100" step="1"></slider>
+                    <!--<input name="valueTo" type="text" class="form-control required" ng-model="selectedActionPlan.valueTo" ng-required="true" required>-->
+                    <span ng-show="ActionPlansForm.valueTo.$invalid" class="help-inline" ng-bind="getTranslation('Field name is required')"></span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary pull-right" ng-click="saveActionPlan(selectedActionPlan)" ng-bind="getTranslation('Submit')"
+                ng-disabled="ActionPlansForm.$invalid || ActionPlansForm.$pristine"></button>
+    </form>
+
+</div>

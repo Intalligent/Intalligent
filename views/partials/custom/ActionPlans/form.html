@@ -1,0 +1,130 @@
+<div class="page-content">
+
+    <div class="row" style="height: 30px;">
+        <button class="btn btn-link pull-left hand-cursor" ng-click="viewActionPlans(selectedEmployee._id)" >{{getTranslation('Back to list')}}</button>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+
+            <div class="row">
+
+                <div class="widget-body">
+                    <div class="widget-main">
+
+                        <form class="simple-form" role="form" name="ActionPlans_form">
+
+                            <fieldset>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group" ng-class="{'has-error':ActionPlans_form.status.$invalid}">
+                                            <label ng-bind="getTranslation('Status')"></label>
+                                            <select name="status" class="form-control" ng-model="selectedActionPlan.status" ng-options="obj.value as obj.name for obj in actionPlansStatuses"></select>
+                                            <span ng-show="ActionPlans_form.status.$invalid" class="help-inline" ng-bind="getTranslation('This field is required')"></span>
+                                        </div>
+
+                                        <div class="form-group" ng-class="{'has-error':ActionPlans_form.actionPlanDescription.$invalid}">
+                                            <label>{{getTranslation("Action Plan Description")}}</label>
+                                            <textarea type="text" class="form-control" name="actionPlanDescription" id="actionPlanDescription" ng-model="selectedActionPlan.actionPlanDescription" required></textarea>
+                                            <span ng-show="ActionPlans_form.actionPlanDescription.$invalid" class="help-inline">{{getTranslation("This field is required")}}</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="code">{{getTranslation("Action Plan Instructions")}}</label>
+                                            <textarea type="text" class="form-control" name="actionPlanInstructions" id="actionPlanInstructions" ng-model="selectedActionPlan.actionPlanInstructions"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="code">{{getTranslation("Observations")}}</label>
+                                            <textarea type="text" class="form-control" name="observations" id="observations" ng-model="selectedActionPlan.observations"></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="code">{{getTranslation("Link")}}</label>
+                                            <input type="text" class="form-control" name="link" id="link" ng-model="selectedActionPlan.link">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label ng-bind="getTranslation('Trainers')"></label>
+                                            <select multiple ng-init="initChosen('trainers')" id="trainers" name="trainers" class="form-control chosen-select" ng-model="selectedActionPlan.trainers"></select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label ng-bind="getTranslation('Action Plan Category')"></label>
+                                            <select name="actionCategory" class="form-control" ng-model="selectedActionPlan.actionCategory" ng-options="obj._id as obj.actionCategory for obj in actionCategories"></select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>{{getTranslation("Percent Completed")}}</label>
+                                            <slider ng-model="selectedActionPlan.percentCompleted" floor="0" ceiling="100" step="1"></slider>
+                                        </div>
+
+                                        <!--estimatedStartDate: {type: Date},
+                                        estimatedEndDate: {type: Date},
+                                        <div class="form-group">
+                                            <input type="text" class="form-control date-picker" datepicker-popup="dd-MM-yyyy"
+                                                   name="estimatedStartDate" id="estimatedStartDate" ng-model="selectedActionPlan.estimatedStartDate" close-text="Cerrar" />
+                                              <span class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                              </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="code">{{getTranslation("Estimated Start Date")}}</label>
+                                            <input type="text" class="form-control" name="estimatedStartDate" id="estimatedStartDate" ng-model="selectedActionPlan.estimatedStartDate">
+                                            <datepicker ng-model="selectedActionPlan.estimatedStartDate"></datepicker>
+                                        </div> -->
+                                        <div class="form-group">
+                                            <label>{{getTranslation("Estimated Start Date")}}</label>
+                                            <input type="text" class="form-control date-picker" datepicker-popup="dd-MM-yyyy" name="estimatedStartDate" id="estimatedStartDate"
+                                                   ng-model="selectedActionPlan.estimatedStartDate" close-text="{{getTranslation('Close')}}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{getTranslation("Estimated End Date")}}</label>
+                                            <input type="text" class="form-control date-picker" datepicker-popup="dd-MM-yyyy" name="estimatedEndDate" id="estimatedEndDate"
+                                                   ng-model="selectedActionPlan.estimatedEndDate" close-text="{{getTranslation('Close')}}" />
+                                        </div>
+
+                                        <div class="form-group" ng-show="selectedActionPlan.startDate">
+                                            <label>{{getTranslation("Start Date")}}</label>
+                                            <p ng-bind="selectedActionPlan.startDate  | date:'medium'"></p>
+                                        </div>
+
+                                        <div class="form-group" ng-show="selectedActionPlan.endDate">
+                                            <label>{{getTranslation("End Date")}}</label>
+                                            <p ng-bind="selectedActionPlan.endDate  | date:'medium'"></p>
+                                        </div>
+
+                                        <div class="form-group" ng-show="selectedActionPlan.revisionDate">
+                                            <label>{{getTranslation("Revision Date")}}</label>
+                                            <p ng-bind="selectedActionPlan.revisionDate  | date:'medium'"></p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <button ng-disabled="ActionPlans_form.$invalid || ActionPlans_form.$pristine" id="btnSave" class="btn btn-primary pull-right" ng-click="saveActionPlan(selectedActionPlan)">
+                                    <i class="fa fa-save"></i>
+                                    {{getTranslation("Save")}}
+                                </button>
+
+                            </fieldset>
+                        </form>
+
+                    </div><!-- /widget-main -->
+                </div><!-- /widget-body -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

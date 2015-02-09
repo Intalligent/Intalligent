@@ -1,0 +1,66 @@
+<div ng-include src="submenu"></div>
+
+<aside class="right-side" ng-init="getFile()">
+    <div class="breadcrumbs" id="breadcrumbs">
+
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="/home/#/home">Home</a>
+            </li>
+            <li>
+                <a href="/home/#/admin">Admin</a>
+            </li>
+            <li>
+                <a href="/home/#/admin/files">Files</a>
+            </li>
+            <li class="active">Edit</li>
+        </ul><!-- .breadcrumb -->
+
+    </div>
+
+    <div class="page-content">
+
+        <div class="row">
+
+            <div class="col-xs-6">
+                <div class="widget-box">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="smaller" ng-bind="adminFilesModel.data.name"></h4>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div class="center" ng-if="adminFilesModel.data.type == 'image'">
+                                <img ng-src="{{adminFilesModel.data.url}}" style="height: 200px; width: auto;"/>
+                            </div>
+                            <dl class="dl-file-horizontal">
+                                <dt>Name</dt>
+                                <dd ng-bind="adminFilesModel.data.name"></dd>
+                                <dt>Type</dt>
+                                <dd ng-bind="adminFilesModel.data.type"></dd>
+                                <dt>Size</dt>
+                                <dd ng-bind="bytesToSize(adminFilesModel.data.size)"></dd>
+                                <dt>URL</dt>
+                                <dd><a ng-bind="adminFilesModel.data.url" href="{{adminFilesModel.data.url}}" target="_blank"></a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-6">
+                <form novalidate id="files-form" name="files-form" role="form" ng-submit="editFile(adminFilesModel.data)">
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input name="name" type="text" class="form-control" ng-model="adminFilesModel.data.description">
+                    </div>
+                    <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
