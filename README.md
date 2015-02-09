@@ -29,5 +29,6 @@ go to our main support site http://help.intalligent.info
 
 
 http://intalligent.info
+
 info@intalligent.com
 
